@@ -1,0 +1,2 @@
+# Config
+Common software configuration
