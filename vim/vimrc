@@ -1,0 +1,127 @@
+set nu
+set shiftwidth=4
+set tabstop=4
+set expandtab
+
+set noswapfile
+set nobackup
+set smartindent
+
+set history=1000
+set nobackup
+set ruler
+" set cursorline
+set scrolloff=1
+set laststatus=2
+set backspace=indent,eol,start
+set hlsearch
+
+set statusline=\ [TYPE=%Y]\ [LEN:%l/%L]\ %F%m%r%h%w\
+
+" set ignorecase smartcase
+
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+
+filetype plugin indent on
+
+set nocompatible
+
+let mapleader=","
+let g:mapleader=","
+map <leader>s :source ~/.vimrc<cr>
+map <leader>e :e ~/.vimrc<cr>
+
+set pastetoggle=<F9> 
+
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+" plugin on GitHub repo
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'
+
+Plugin 'altercation/vim-colors-solarized'
+
+" plugin on vim-scripts
+Plugin 'Mark'
+Plugin 'taglist.vim'
+Plugin 'VisIncr'
+Plugin 'Markdown'
+
+call vundle#end()
+
+set completeopt=longest,menu
+
+" ctrlp
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlP'
+let g:ctrlp_match_window='bottom,order:ttb,min:1,max:10,results:20'
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+
+" ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" taglist
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Show_One_File=1
+let Tlist_WinWidth=60
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Use_Left_Windo=1
+let Tlist_Auto_Open=0
+
+map tl :TlistToggle<cr>
+
+" nerdtree
+let NERDTreeWinSize=60
+
+map tt :NERDTreeToggle<cr>
+
+" nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+
+" autopep8
+let g:autopep8_disable_show_diff=1
+
+" ctags
+set tags+=~/.vim/systags
+
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_cache_omnifunc=0
+let g:ycm_collect_identifiers_from_comments_and_strings=0
+let g:ycm_complete_in_comments=1
+let g:ycm_complete_in_strings=1
+let g:ycm_collect_identifiers_from_tags_files=1
+
+" theme
+syntax enable
+
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
+set t_Co=16
+let g:solarized_termcolors=16
+colorscheme solarized
+
