@@ -31,7 +31,7 @@ let g:mapleader=","
 map <leader>s :source ~/.vimrc<cr>
 map <leader>e :e ~/.vimrc<cr>
 
-set pastetoggle=<F9> 
+set pastetoggle=<F10> 
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -46,6 +46,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
+Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 
 Plugin 'altercation/vim-colors-solarized'
 
@@ -111,6 +113,10 @@ let g:ycm_collect_identifiers_from_comments_and_strings=0
 let g:ycm_complete_in_comments=1
 let g:ycm_complete_in_strings=1
 let g:ycm_collect_identifiers_from_tags_files=1
+
+" ack
+let g:ackprg = 'ag --nogroup --nocolor --column'
+map <c-u> : Ack<space>
 
 " theme
 syntax enable

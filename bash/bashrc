@@ -5,6 +5,16 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+shopt -s histappend
+
+export HISTFILESIZE=1000000
+export HISTSIZE=100000
+
+export HISTTIMEFORMAT='%F %T  '
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
