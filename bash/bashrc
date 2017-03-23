@@ -1,5 +1,7 @@
 # .bashrc
 
+# ln -s $HOME/config/bash/bashrc ~/.bashrc
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
@@ -40,4 +42,5 @@ alias gp="git pull --all"
 alias gsu="git submodule update"
 alias gd="git diff"
 alias gs="git status"
+alias gl="git log"
 

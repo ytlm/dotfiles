@@ -1,3 +1,6 @@
+
+" ln -s $HOME/config/vim/vimrc ~/.vimrc
+
 set nu
 set shiftwidth=4
 set tabstop=4
@@ -49,6 +52,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'rking/ag.vim'
 Plugin 'mileszs/ack.vim'
 
+" theme
 Plugin 'altercation/vim-colors-solarized'
 
 " plugin on vim-scripts
