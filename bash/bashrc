@@ -36,11 +36,11 @@ alias lh='ls -lh'
 alias vi='vim'
 
 # git
-alias gp="git pull --all"
+alias gpa="git pull --all"
 alias gsu="git submodule update"
-alias gd="git diff"
-alias gs="git status"
-alias gl="git log"
-alias gc="git checkout"
-alias ga="git add"
+alias gdf="git diff"
+alias gst="git status"
+alias glg="git log"
+alias gco="git checkout"
+alias gad="git add"
 
