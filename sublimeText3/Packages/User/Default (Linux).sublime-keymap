@@ -4,5 +4,6 @@
     { "keys": ["alt+d"], "command": "navigate_to_definition" },
     { "keys": ["alt+p"], "command": "jump_prev" },
     { "keys": ["alt+r"], "command": "rebuild_tags"  },
+    { "keys": ["ctrl+alt+m"], "command": "un_pretty_json"}
 
 ]
