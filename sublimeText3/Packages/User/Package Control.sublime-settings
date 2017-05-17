@@ -12,6 +12,8 @@
 		"DocBlockr",
 		"Emmet",
 		"FileDiffs",
+		"Git",
+		"GitGutter",
 		"Markdown Preview",
 		"Package Control",
 		"Pretty JSON",
