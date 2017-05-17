@@ -44,3 +44,6 @@ alias glg="git log"
 alias gco="git checkout"
 alias gad="git add"
 
+alias copy='xsel --clipboard --input'
+alias paste='xsel --clipboard --output'
+
