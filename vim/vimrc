@@ -1,5 +1,9 @@
 
+
 " ln -s $HOME/config/vim/vimrc ~/.vimrc
+
+" replace double @ to email
+iabbrev @@ ytlm1314@gmail.com
 
 set nu
 set shiftwidth=4
@@ -30,9 +34,40 @@ filetype plugin indent on
 set nocompatible
 
 let mapleader=","
-let g:mapleader=","
-map <leader>s :source ~/.vimrc<cr>
-map <leader>e :e ~/.vimrc<cr>
+let maplocalleader="\\"
+
+noremap <leader>sv :source $MYVIMRC<cr>
+noremap <leader>ev :split $MYVIMRC<cr>
+
+" press <space> to select a word
+noremap <space> viw
+
+" insert mode press <ctrl + d> to delete a line
+inoremap <c-d> <esc>ddi
+
+" insert mode press <ctrl + u> to chang word to upper
+inoremap <c-u> <esc>viwUi
+
+" normal mode press <ctrl + u> to change word to upper
+nnoremap <c-u> viwU
+
+" normal mode press <, + \"> let \" to a word
+nnorema <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+noremap H 0
+noremap L $
+
+inoremap jk <esc>
+inoremap <esc> <nop>
+inoremap <c-c> <nop>
+
+
+" autocmd
+autocmd FileType javascript nnoremap <buffer> <localleader>c 0i// <esc>
+autocmd FileType c nnoremap <buffer> <localleader>c 0i// <esc>
+autocmd FileType python nnoremap <buffer> <localleader>c 0i# <esc>
+autocmd FileType erlang nnoremap <buffer> <localleader>c 0i% <esc>
+autocmd FileType lua nnoremap <buffer> <localleader>c 0i-- <esc>
 
 set pastetoggle=<F10> 
 
@@ -88,12 +123,12 @@ let Tlist_Exit_OnlyWindow=1
 let Tlist_Use_Left_Windo=1
 let Tlist_Auto_Open=0
 
-map tl :TlistToggle<cr>
+noremap tl :TlistToggle<cr>
 
 " nerdtree
 let NERDTreeWinSize=60
 
-map tt :NERDTreeToggle<cr>
+noremap tt :NERDTreeToggle<cr>
 
 " nerdcommenter
 let g:NERDSpaceDelims = 1
@@ -112,6 +147,7 @@ set tags+=~/.vim/systags
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_server_python_interpreter = '/usr/bin/python2.7'
 let g:ycm_cache_omnifunc=0
 let g:ycm_collect_identifiers_from_comments_and_strings=0
 let g:ycm_complete_in_comments=1
@@ -120,7 +156,6 @@ let g:ycm_collect_identifiers_from_tags_files=1
 
 " ack
 let g:ackprg = 'ag --nogroup --nocolor --column'
-map <c-u> : Ack<space>
 
 " theme
 syntax enable
