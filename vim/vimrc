@@ -23,7 +23,7 @@ set laststatus=2
 set backspace=indent,eol,start
 set hlsearch
 
-set statusline=\ [TYPE=%Y]\ [LEN:%l/%L]\ %F%m%r%h%w\
+set statusline=\ [TYPE=%Y]\ [LEN:%l/%L]\ %F\
 
 " set ignorecase smartcase
 
@@ -60,14 +60,28 @@ noremap L $
 inoremap jk <esc>
 inoremap <esc> <nop>
 inoremap <c-c> <nop>
+vnoremap jk <esc> 
+vnoremap <esc> <nop>
+vnoremap <c-c> <nop>
 
 
 " autocmd
 autocmd FileType javascript nnoremap <buffer> <localleader>c 0i// <esc>
 autocmd FileType c nnoremap <buffer> <localleader>c 0i// <esc>
+autocmd FileType cpp nnoremap <buffer> <localleader>c 0i// <esc>
 autocmd FileType python nnoremap <buffer> <localleader>c 0i# <esc>
 autocmd FileType erlang nnoremap <buffer> <localleader>c 0i% <esc>
 autocmd FileType lua nnoremap <buffer> <localleader>c 0i-- <esc>
+
+autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+autocmd FileType python :iabbrev <buffer> iff if :<left>
+
+
+" press <dp> will delete all in (), <cp> insert mode
+onoremap p i(
+
+" press <db> will delete all until return, <cb> insert mode
+onoremap b /return<cr> 
 
 set pastetoggle=<F10> 
 
@@ -84,8 +98,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
-Plugin 'rking/ag.vim'
-Plugin 'mileszs/ack.vim'
 
 " theme
 Plugin 'altercation/vim-colors-solarized'
@@ -153,9 +165,6 @@ let g:ycm_collect_identifiers_from_comments_and_strings=0
 let g:ycm_complete_in_comments=1
 let g:ycm_complete_in_strings=1
 let g:ycm_collect_identifiers_from_tags_files=1
-
-" ack
-let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " theme
 syntax enable
