@@ -1,7 +1,4 @@
 
-
-" ln -s $HOME/config/vim/vimrc ~/.vimrc
-
 " replace double @ to email
 iabbrev @@ ytlm1314@gmail.com
 
