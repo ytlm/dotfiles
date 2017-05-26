@@ -52,7 +52,9 @@ inoremap <c-u> <esc>viwUi
 nnoremap <c-u> viwU
 
 " normal mode press <, + \"> let \" to a word
-nnorema <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+
+nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
 
 noremap H 0
 noremap L $
@@ -95,7 +97,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 
