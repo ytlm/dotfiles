@@ -14,7 +14,7 @@ set smartindent
 set history=1000
 set nobackup
 set ruler
-" set cursorline
+set cursorline
 set scrolloff=1
 set laststatus=2
 set backspace=indent,eol,start
@@ -51,18 +51,8 @@ nnoremap <c-u> viwU
 " normal mode press <, + \"> let \" to a word
 nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 
-nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
-
 noremap H 0
 noremap L $
-
-inoremap jk <esc>
-inoremap <esc> <nop>
-inoremap <c-c> <nop>
-vnoremap jk <esc> 
-vnoremap <esc> <nop>
-vnoremap <c-c> <nop>
-
 
 " autocmd
 autocmd FileType javascript nnoremap <buffer> <localleader>c 0i// <esc>
