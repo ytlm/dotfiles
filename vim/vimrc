@@ -1,4 +1,10 @@
 
+" Load vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    execute '!curl -fLo ~/.vim/autoload/plug.vim
+https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
+
 " replace double @ to email
 iabbrev @@ ytlm1314@gmail.com
 
@@ -20,7 +26,7 @@ set laststatus=2
 set backspace=indent,eol,start
 set hlsearch
 
-set statusline=\ [TYPE=%Y]\ [LEN:%l/%L]\ %F\
+set statusline=%F\ [TYPE=%Y]\ [POS:%l/%v][%p%%]\ [LEN:%l/%L]\ %m
 
 " set ignorecase smartcase
 
@@ -39,77 +45,35 @@ noremap <leader>ev :split $MYVIMRC<cr>
 " press <space> to select a word
 noremap <space> viw
 
-" insert mode press <ctrl + d> to delete a line
-inoremap <c-d> <esc>ddi
-
-" insert mode press <ctrl + u> to chang word to upper
-inoremap <c-u> <esc>viwUi
-
-" normal mode press <ctrl + u> to change word to upper
-nnoremap <c-u> viwU
-
-" normal mode press <, + \"> let \" to a word
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
-
-noremap H 0
-noremap L $
-
-" autocmd
-autocmd FileType javascript nnoremap <buffer> <localleader>c 0i// <esc>
-autocmd FileType c nnoremap <buffer> <localleader>c 0i// <esc>
-autocmd FileType cpp nnoremap <buffer> <localleader>c 0i// <esc>
-autocmd FileType python nnoremap <buffer> <localleader>c 0i# <esc>
-autocmd FileType erlang nnoremap <buffer> <localleader>c 0i% <esc>
-autocmd FileType lua nnoremap <buffer> <localleader>c 0i-- <esc>
-
-autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
-autocmd FileType python :iabbrev <buffer> iff if :<left>
-
-
-" press <dp> will delete all in (), <cp> insert mode
-onoremap p i(
-
-" press <db> will delete all until return, <cb> insert mode
-onoremap b /return<cr> 
-
 set pastetoggle=<F12> 
 
-" Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-" plugin on GitHub repo
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
+" YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
-" theme
-Plugin 'altercation/vim-colors-solarized'
+" nerdcommenter
+Plug 'scrooloose/nerdcommenter'
 
-" plugin on vim-scripts
-Plugin 'Mark'
-Plugin 'taglist.vim'
-Plugin 'VisIncr'
-Plugin 'Markdown'
+" taglist
+Plug 'vim-scripts/taglist.vim'
 
-call vundle#end()
+" ultisnips
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" solarized
+Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
+
+call plug#end()
 
 set completeopt=longest,menu
 
-" ctrlp
-let g:ctrlp_map='<c-p>'
-let g:ctrlp_cmd='CtrlP'
-let g:ctrlp_match_window='bottom,order:ttb,min:1,max:10,results:20'
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
-    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
-    \ }
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+" fzf
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -121,15 +85,9 @@ let Tlist_Ctags_Cmd='/usr/bin/ctags'
 let Tlist_Show_One_File=1
 let Tlist_WinWidth=60
 let Tlist_Exit_OnlyWindow=1
-let Tlist_Use_Left_Windo=1
-let Tlist_Auto_Open=0
+let Tlist_Use_Right_Window = 1
 
 noremap tl :TlistToggle<cr>
-
-" nerdtree
-let NERDTreeWinSize=60
-
-noremap tt :NERDTreeToggle<cr>
 
 " nerdcommenter
 let g:NERDSpaceDelims = 1
@@ -140,12 +98,6 @@ let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" autopep8
-let g:autopep8_disable_show_diff=1
-
-" ctags
-set tags+=~/.vim/systags
-
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf='~/.vim/ycm_extra_conf.py'
 let g:ycm_cache_omnifunc=1
@@ -154,18 +106,12 @@ let g:ycm_complete_in_comments=1
 let g:ycm_complete_in_strings=1
 let g:ycm_collect_identifiers_from_tags_files=1
 
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
 " theme
 syntax enable
 
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
-
-set t_Co=16
+set t_Co=256
 let g:solarized_termcolors=16
+
+set background=dark
 colorscheme solarized
 
