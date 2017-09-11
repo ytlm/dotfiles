@@ -5,6 +5,14 @@ if empty(glob("~/.vim/autoload/plug.vim"))
 https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
+" auto open the last edit line
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+noremap H ^
+noremap L $
+
 " replace double @ to email
 iabbrev @@ ytlm1314@gmail.com
 
@@ -31,6 +39,10 @@ set statusline=%F\ [TYPE=%Y]\ [POS:%l/%v][%p%%]\ [LEN:%l/%L]\ %m
 " set ignorecase smartcase
 
 set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+
+set shortmess+=c
+" set t_ti= t_te=
+set mouse-=a
 
 filetype plugin indent on
 
@@ -74,6 +86,7 @@ call plug#end()
 set completeopt=longest,menu
 
 " fzf
+noremap <C-p> :FZF<cr>
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
@@ -115,3 +128,16 @@ let g:solarized_termcolors=16
 set background=dark
 colorscheme solarized
 
+autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+function! AutoSetFileHead()
+    if &filetype == 'sh'
+        call append(0, "\#!/bin/bash")
+        call cursor(1, 0, 0)
+    endif
+
+    if &filetype == 'python'
+        call append(0, "\#!/usr/bin/env python")
+        call append(1, "\# _*_ encoding: utf-8 _*_")
+        call cursor(2, 0, 0)
+    endif
+endfunc
