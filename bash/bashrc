@@ -42,6 +42,28 @@ alias gad="git add"
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
 
+tt () {
+    if [ -f $1 ] ; then
+        case $1 in 
+            *.tar.bz2)          tar -jxvf $1    ;;
+            *.tar.gz)           tar -zxvf $1    ;;
+            *.tar.xz)           tar -Jxvf $1    ;;
+            *.tar)              tar -xvf $1     ;;
+            *.tbz2)             tar -xjf $1     ;;
+            *.tgz)              tar -xzf $1     ;;
+            *.bz2)              bunzip2 $1      ;;
+            *.rar)              unrar $1        ;;
+            *.gz)               gunzip $1       ;;
+            *.zip)              unzip $1        ;;
+            *.Z)                uncompress $1   ;;
+            *.7Z)               7z x $1         ;;
+            *)            echo "'$1' cannot be extracted via tt()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
 PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
 export PKG_CONFIG_PATH
 
