@@ -5,14 +5,15 @@
 	],
 	"installed_packages":
 	[
+		"A File Icon",
 		"All Autocomplete",
-		"ColorPicker",
 		"ConvertToUTF8",
 		"CTags",
 		"DocBlockr",
-		"Emmet",
+		"Dockerfile Syntax Highlighting",
 		"FileDiffs",
 		"Markdown Preview",
+		"nginx",
 		"Package Control",
 		"Pretty JSON",
 		"Pretty YAML",
