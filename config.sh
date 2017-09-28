@@ -1,20 +1,28 @@
+#!/bin/bash
+dir=`pwd`
 # conky
-ln -s $HOME/config/conky /etc/conky
+ln -s $dir/conky /etc/conky
 
 # sublime text 3
-ln -s $HOME/config/sublimeText3 $HOME/.config/sublime-text-3
+ln -s $dir/sublimeText3 $HOME/.config/sublime-text-3
 
 # tmux
-ln -s $HOME/config/tmux/tmux.conf $HOME/.tmux.conf
+ln -s $dir/tmux/tmux.conf $HOME/.tmux.conf
 
 # vim
-ln -s $HOME/config/vim/vimrc $HOME/.vimrc 
+ln -s $dir/vim/vimrc $HOME/.vimrc
 
 # bash
-ln -s $HOME/config/bash/bashrc $HOME/.bashrc
+ln -s $dir/bash/bashrc $HOME/.bashrc
 
-# zsh 
-ln -s $HOME/config/zsh/zshrc $HOME/.zshrc
+# zsh
+ln -s $dir/zsh/zshrc $HOME/.zshrc
+
+# gdb init
+ln -s $dir/gdb $HOME/gdb
+
+# aria2
+ln -s $dir/aria2 /etc/aria2
 
 # screenfetch
-sudo ln -s $HOME/config/screenFetch/screenfetch-dev /bin/screenfetch
+ln -s $dir/screenFetch/screenfetch-dev /bin/screenfetch
