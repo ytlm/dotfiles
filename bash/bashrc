@@ -44,9 +44,9 @@ alias paste='xsel --clipboard --output'
 
 tt () {
     if [ -f $1 ] ; then
-        case $1 in 
+        case $1 in
             *.tar.bz2)          tar -jxvf $1    ;;
-            *.tar.gz)           tar -zxvf $1    ;;
+            *.tar.gz)           tar -xvf $1     ;;
             *.tar.xz)           tar -Jxvf $1    ;;
             *.tar)              tar -xvf $1     ;;
             *.tbz2)             tar -xjf $1     ;;
@@ -64,7 +64,7 @@ tt () {
     fi
 }
 
-PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
-export PKG_CONFIG_PATH
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
+
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -11,6 +11,7 @@ ln -s $dir/tmux/tmux.conf $HOME/.tmux.conf
 
 # vim
 ln -s $dir/vim/vimrc $HOME/.vimrc
+ln -s $HOME/.vim /root/.vim
 
 # bash
 ln -s $dir/bash/bashrc $HOME/.bashrc

@@ -132,7 +132,7 @@ colorscheme solarized
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()
     if &filetype == 'sh'
-        call append(0, "\#!/bin/bash")
+        call append(0, "\#!/usr/bin/env bash")
         call cursor(1, 0, 0)
     endif
 
