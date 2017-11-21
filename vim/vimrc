@@ -41,7 +41,7 @@ set statusline=%F\ [TYPE=%Y]\ [POS:%l/%v][%p%%]\ [LEN:%l/%L]\ %m
 
 set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 
-set shortmess+=c
+" set shortmess+=c
 " set t_ti= t_te=
 set mouse-=a
 
@@ -67,7 +67,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
 " nerdcommenter
 Plug 'scrooloose/nerdcommenter'
@@ -80,7 +80,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " solarized
-Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
+" Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
 
 call plug#end()
 
@@ -121,13 +121,13 @@ let g:ycm_complete_in_strings=1
 let g:ycm_collect_identifiers_from_tags_files=1
 
 " theme
-syntax enable
+" syntax enable
 
-set t_Co=256
-let g:solarized_termcolors=16
+" set t_Co=256
+" let g:solarized_termcolors=16
 
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 
 autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 function! AutoSetFileHead()

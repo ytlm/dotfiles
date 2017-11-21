@@ -56,3 +56,7 @@ ln -s $currDir/zsh/zshrc $homeDir/.zshrc
 # gdb init
 rm -rf $homeDir/gdb
 ln -s $currDir/gdb $homeDir/gdb
+
+# gnome-shell extensions
+mkdir -p $homeDir/.local/share/gnome-shell/
+sudo ln -s $currDir/gnome-shell/extensions/ $homeDir/.local/share/gnome-shell/extensions
