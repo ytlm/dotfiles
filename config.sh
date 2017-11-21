@@ -1,29 +1,52 @@
 #!/bin/bash
-dir=`pwd`
+
+currDir=`pwd`
+homeDir="/home/ytl"
+rootDir="/root"
+
+if [ "$USER" = "root" ];then
+
 # conky
-ln -s $dir/conky /etc/conky
+    rm -rf /etc/conky
+    ln -s $currDir/conky /etc/conky
 
-# sublime text 3
-ln -s $dir/sublimeText3 $HOME/.config/sublime-text-3
-
-# tmux
-ln -s $dir/tmux/tmux.conf $HOME/.tmux.conf
-
-# vim
-ln -s $dir/vim/vimrc $HOME/.vimrc
-ln -s $HOME/.vim /root/.vim
-
-# bash
-ln -s $dir/bash/bashrc $HOME/.bashrc
-
-# zsh
-ln -s $dir/zsh/zshrc $HOME/.zshrc
-
-# gdb init
-ln -s $dir/gdb $HOME/gdb
-
+#vim
+    rm -rf $rootDir/.vim
+    ln -s $homeDir/.vim $rootDir/.vim
+    ln -s $currDir/vim/vimrc $rootDir/.vimrc
+    
 # aria2
-ln -s $dir/aria2 /etc/aria2
+    rm -rf /etc/aria2
+    ln -s $currDir/aria2 /etc/aria2
 
 # screenfetch
-ln -s $dir/screenFetch/screenfetch-dev /bin/screenfetch
+    rm -rf /bin/screenfetch
+    ln -s $currDir/screenFetch/screenfetch-dev /bin/screenfetch
+
+fi
+
+# sublime text 3
+mkdir -p $homeDir/.config
+rm -rf $homeDir/.config/sublime-text-3
+ln -s $currDir/sublimeText3 $homeDir/.config/sublime-text-3
+
+# tmux
+rm -rf $homeDir/.tmux.conf
+ln -s $currDir/tmux/tmux.conf $homeDir/.tmux.conf
+
+# vim
+mkdir -p $homeDir/.vim/autoload
+rm -rf $homeDir/.vimrc
+ln -s $currDir/vim/vimrc $homeDir/.vimrc
+
+# bash
+rm -rf $homeDir/.bashrc
+ln -s $currDir/bash/bashrc $homeDir/.bashrc
+
+# zsh
+rm -rf $homeDir/.zshrc
+ln -s $currDir/zsh/zshrc $homeDir/.zshrc
+
+# gdb init
+rm -rf $homeDir/gdb
+ln -s $currDir/gdb $homeDir/gdb
