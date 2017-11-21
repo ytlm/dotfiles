@@ -54,3 +54,8 @@ ln -s $currDir/gdb $homeDir/gdb
 # gnome-shell extensions
 mkdir -p $homeDir/.local/share/gnome-shell/
 sudo ln -s $currDir/gnome-shell/extensions/ $homeDir/.local/share/gnome-shell/extensions
+
+# fonts, Source Code Pro
+rm -rf $homeDir/.fonts
+sudo ln -sv $currDir/fonts/ $homeDir/.fonts
+fc-cache -f -v
