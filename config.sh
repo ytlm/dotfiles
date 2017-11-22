@@ -14,7 +14,7 @@ if [ "$USER" = "root" ];then
     rm -rf $rootDir/.vim
     ln -s $homeDir/.vim $rootDir/.vim
     ln -s $currDir/vim/vimrc $rootDir/.vimrc
-    
+
 # aria2
     rm -rf /etc/aria2
     ln -s $currDir/aria2 /etc/aria2
@@ -23,6 +23,11 @@ if [ "$USER" = "root" ];then
     rm -rf /bin/screenfetch
     ln -s $currDir/screenFetch/screenfetch-dev /bin/screenfetch
 
+#bashrc
+    rm -rf $rootDir/.bashrc
+    ln -s $currDir/bash/bashrc $rootDir/.bashrc
+
+    exit 0
 fi
 
 # sublime text 3
