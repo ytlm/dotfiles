@@ -27,6 +27,11 @@ if [ "$USER" = "root" ];then
     rm -rf $rootDir/.bashrc
     ln -s $currDir/bash/bashrc $rootDir/.bashrc
 
+#sublime text 3
+    mkdir -p $rootDir/.config
+    rm -rf $rootDir/.config/sublime-text-3
+    ln -s $currDir/sublimeText3 $rootDir/.config/sublime-text-3
+
     exit 0
 fi
 
@@ -43,6 +48,7 @@ ln -s $currDir/tmux/tmux.conf $homeDir/.tmux.conf
 mkdir -p $homeDir/.vim/autoload
 rm -rf $homeDir/.vimrc
 ln -s $currDir/vim/vimrc $homeDir/.vimrc
+ln -sv $currDir/vim/ycm_extra_conf.py $homeDir/.vim/ycm_extra_conf.py
 
 # bash
 rm -rf $homeDir/.bashrc

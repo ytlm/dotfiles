@@ -55,6 +55,7 @@ tt () {
             *.rar)              unrar $1        ;;
             *.gz)               gunzip $1       ;;
             *.zip)              unzip $1        ;;
+            *.war)              jar -xf $1      ;;
             *.Z)                uncompress $1   ;;
             *.7Z)               7z x $1         ;;
             *)            echo "'$1' cannot be extracted via tt()" ;;
@@ -64,7 +65,17 @@ tt () {
     fi
 }
 
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/opt/ffmpeg/lib/pkgconfig
 
+export JAVA_HOME=/usr/java/jdk1.8.0_121
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
+
+export CATALINA_BASE=/home/ytl/work/apache-tomcat-8.5.23
+
+export PATH=/home/ytl/work/oss/apache-maven-3.5.0/bin:${CATALINA_BASE}/bin:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin
+
+export LD_LIBRARY_PATH=/opt/ffmpeg/lib
+export LIBRARY_PATH=/opt/ffmpeg/lib
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
