@@ -1,72 +1,64 @@
 #!/bin/bash
 
-currDir=`pwd`
-homeDir="/home/ytl"
-rootDir="/root"
+currDir=$(cd `dirname $0`; pwd)
+homeDir=$HOME
 
 if [ "$USER" = "root" ];then
 
 # conky
     rm -rf /etc/conky
-    ln -s $currDir/conky /etc/conky
-
-#vim
-    rm -rf $rootDir/.vim
-    ln -s $homeDir/.vim $rootDir/.vim
-    ln -s $currDir/vim/vimrc $rootDir/.vimrc
+    ln -sv $currDir/conky /etc/conky
 
 # aria2
     rm -rf /etc/aria2
-    ln -s $currDir/aria2 /etc/aria2
+    ln -sv $currDir/aria2 /etc/aria2
 
 # screenfetch
     rm -rf /bin/screenfetch
-    ln -s $currDir/screenFetch/screenfetch-dev /bin/screenfetch
+    ln -sv $currDir/screenFetch/screenfetch-dev /bin/screenfetch
 
-#bashrc
-    rm -rf $rootDir/.bashrc
-    ln -s $currDir/bash/bashrc $rootDir/.bashrc
+# vim
+    rm -rf $homeDir/.vim
 
-#sublime text 3
-    mkdir -p $rootDir/.config
-    rm -rf $rootDir/.config/sublime-text-3
-    ln -s $currDir/sublimeText3 $rootDir/.config/sublime-text-3
-
-    exit 0
 fi
 
 # sublime text 3
 mkdir -p $homeDir/.config
 rm -rf $homeDir/.config/sublime-text-3
-ln -s $currDir/sublimeText3 $homeDir/.config/sublime-text-3
+ln -sv $currDir/sublimeText3 $homeDir/.config/sublime-text-3
 
 # tmux
 rm -rf $homeDir/.tmux.conf
-ln -s $currDir/tmux/tmux.conf $homeDir/.tmux.conf
+ln -sv $currDir/tmux/tmux.conf $homeDir/.tmux.conf
 
 # vim
 mkdir -p $homeDir/.vim/autoload
 rm -rf $homeDir/.vimrc
-ln -s $currDir/vim/vimrc $homeDir/.vimrc
+ln -sv $currDir/vim/vimrc $homeDir/.vimrc
 ln -sv $currDir/vim/ycm_extra_conf.py $homeDir/.vim/ycm_extra_conf.py
+
+if [[ "$USER" != "root"]];then
+    sudo ln -sv $homeDir/.vim /root/.vim
+fi
 
 # bash
 rm -rf $homeDir/.bashrc
-ln -s $currDir/bash/bashrc $homeDir/.bashrc
+ln -sv $currDir/bash/bashrc $homeDir/.bashrc
+source $homeDir/.bashrc
 
 # zsh
 rm -rf $homeDir/.zshrc
-ln -s $currDir/zsh/zshrc $homeDir/.zshrc
+ln -sv $currDir/zsh/zshrc $homeDir/.zshrc
 
 # gdb init
 rm -rf $homeDir/gdb
-ln -s $currDir/gdb $homeDir/gdb
+ln -sv $currDir/gdb $homeDir/gdb
 
 # gnome-shell extensions
 mkdir -p $homeDir/.local/share/gnome-shell/
-sudo ln -s $currDir/gnome-shell/extensions/ $homeDir/.local/share/gnome-shell/extensions
+ln -sv $currDir/gnome-shell/extensions/ $homeDir/.local/share/gnome-shell/extensions
 
 # fonts, Source Code Pro
 rm -rf $homeDir/.fonts
-sudo ln -sv $currDir/fonts/ $homeDir/.fonts
+ln -sv $currDir/fonts/ $homeDir/.fonts
 fc-cache -f -v

@@ -42,7 +42,7 @@ set statusline=%F\ [TYPE=%Y]\ [POS:%l/%v][%p%%]\ [LEN:%l/%L]\ %m
 set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 
 set shortmess+=c
-set t_ti= t_te=
+" set t_ti= t_te=
 set mouse-=a
 
 autocmd BufWritePre * %s/\s\+$//e
