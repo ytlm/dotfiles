@@ -22,3 +22,11 @@ git commit -m "[auto backup] update config"
 git push origin master
 
 popd
+
+#
+# crontab
+#
+# 0 17 * * 5 sh $basepath/backup.sh
+#
+# every friday at five o'clock for backup
+#
