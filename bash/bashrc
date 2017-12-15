@@ -38,6 +38,7 @@ alias gst="git status"
 alias glg="git log"
 alias gco="git checkout"
 alias gad="git add"
+alias glg="git log --pretty=format:\"%H - %an : %cd - %s\""
 
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
@@ -57,7 +58,8 @@ function tt() {
             *.zip)              unzip $1        ;;
             *.war)              jar -xf $1      ;;
             *.Z)                uncompress $1   ;;
-            *.7Z)               7z x $1         ;;
+            *.7Z)               7za x $1         ;;
+            *.7z)               7za x $1         ;; # install p7zip
             *)            echo "'$1' cannot be extracted via tt()" ;;
         esac
     else
@@ -73,9 +75,12 @@ export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOM
 
 export CATALINA_BASE=/home/ytl/work/apache-tomcat-8.5.23
 
-export PATH=/home/ytl/work/oss/apache-maven-3.5.0/bin:${CATALINA_BASE}/bin:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin
+export PATH=/home/ytl/work/oss/apache-maven-3.5.0/bin:${CATALINA_BASE}/bin:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin:/bin:/sbin
 
 export LD_LIBRARY_PATH=/opt/ffmpeg/lib
 export LIBRARY_PATH=/opt/ffmpeg/lib
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# added by travis gem
+[ -f /home/ytl/.travis/travis.sh ] && source /home/ytl/.travis/travis.sh

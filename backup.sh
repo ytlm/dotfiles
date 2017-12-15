@@ -7,6 +7,8 @@ pushd $basepath
 git config user.name "ytlm"
 git config user.email "ytlm1314@gmail.com"
 
+git pull -all
+
 git status > /tmp/status.log
 git diff > /tmp/diff.log
 

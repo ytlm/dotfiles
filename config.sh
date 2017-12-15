@@ -3,7 +3,7 @@
 currDir=$(cd `dirname $0`; pwd)
 homeDir=$HOME
 
-if [ "$USER" = "root" ];then
+if [[ "$USER" = "root" ]];then
 
 # conky
     rm -rf /etc/conky
@@ -37,7 +37,7 @@ rm -rf $homeDir/.vimrc
 ln -sv $currDir/vim/vimrc $homeDir/.vimrc
 ln -sv $currDir/vim/ycm_extra_conf.py $homeDir/.vim/ycm_extra_conf.py
 
-if [[ "$USER" != "root"]];then
+if [[ "$USER" != "root" ]];then
     sudo ln -sv $homeDir/.vim /root/.vim
 fi
 
