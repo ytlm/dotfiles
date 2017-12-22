@@ -7,10 +7,10 @@ pushd $basepath
 git config user.name "ytlm"
 git config user.email "ytlm1314@gmail.com"
 
-git pull -all
+git pull -all > /dev/null 2>&1
 
-git status > /tmp/status.log
-git diff > /tmp/diff.log
+git status > /tmp/status.log 2>&1
+git diff > /tmp/diff.log 2>&1
 
 if [[ `wc -l /tmp/diff.log | awk '{print $1}'` -eq 0 ]]
 then
