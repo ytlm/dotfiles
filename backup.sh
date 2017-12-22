@@ -7,7 +7,11 @@ pushd $basepath
 git config user.name "ytlm"
 git config user.email "ytlm1314@gmail.com"
 
-git pull -all > /dev/null 2>&1
+pushd $basepath/screenFetch
+    git pull --all > /dev/null 2>&1
+popd
+
+git pull --all > /dev/null 2>&1
 
 git status > /tmp/status.log 2>&1
 git diff > /tmp/diff.log 2>&1
