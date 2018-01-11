@@ -39,7 +39,9 @@ set statusline=%F\ [TYPE=%Y]\ [POS:%l/%v][%p%%]\ [LEN:%l/%L]\ %m
 
 " set ignorecase smartcase
 
-set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8
 
 set shortmess+=c
 " set t_ti= t_te=
