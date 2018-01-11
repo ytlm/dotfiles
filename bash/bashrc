@@ -30,16 +30,6 @@ alias lh='ls -lh'
 # vim
 alias vi='vim'
 
-# git
-alias gpa="git pull --all"
-alias gsu="git submodule update"
-alias gdf="git diff"
-alias gst="git status"
-alias glg="git log"
-alias gco="git checkout"
-alias gad="git add"
-alias glg="git log --pretty=format:\"%H - %an : %cd - %s\""
-
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
 

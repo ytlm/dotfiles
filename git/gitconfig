@@ -1,0 +1,11 @@
+[credential]
+	helper = store
+
+[alias]
+    gpa = git pull --all
+    gsu = git submodule update
+    gdf = git diff
+    gst = git status
+    gco = git checkout
+    gad = git add
+    glg = git log --graph --pretty=format:"%Cred%H%Creset : %s : %Cblue%an%Creset%Cgreen(%cr)%Creset"

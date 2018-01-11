@@ -59,3 +59,7 @@ ln -sv $currDir/gnome-shell/extensions/ $homeDir/.local/share/gnome-shell/extens
 rm -rf $homeDir/.fonts
 ln -sv $currDir/fonts/ $homeDir/.fonts
 fc-cache -f -v
+
+# git
+rm -rf $homeDir/.gitconfig
+ln -sv $currDir/git/gitconfig $homeDir/.gitconfig
