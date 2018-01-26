@@ -83,4 +83,3 @@ export LIBRARY_PATH=/opt/ffmpeg/lib
 
 # added by travis gem
 [ -f /home/ytl/.travis/travis.sh ] && source /home/ytl/.travis/travis.sh
-
