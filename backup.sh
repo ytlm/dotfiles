@@ -24,7 +24,7 @@ fi
 
 git add *
 
-git commit -m "[auto backup] update config"
+git commit -am "[auto backup] update config"
 
 git push origin master
 
