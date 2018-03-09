@@ -72,9 +72,7 @@ export JAVA_HOME=/usr/java/jdk1.8.0_121
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
 
-export CATALINA_BASE=/home/ytl/work/apache-tomcat-8.5.23
-
-export PATH=/home/ytl/work/oss/apache-maven-3.5.0/bin:${CATALINA_BASE}/bin:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin:/bin:/sbin
+export PATH=/opt/android-studio/bin:/home/ytl/Work/flutter/bin:/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin:/bin:/sbin
 
 export LD_LIBRARY_PATH=/opt/ffmpeg/lib
 export LIBRARY_PATH=/opt/ffmpeg/lib
