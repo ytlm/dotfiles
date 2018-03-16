@@ -59,6 +59,7 @@ function tt() {
             *.Z)                uncompress $1     ;;
             *.7Z)               7za x $1          ;;
             *.7z)               7za x $1          ;; # install p7zip
+            *.deb)              ar -vx $1         ;;
             *)            echo "'$1' cannot be extracted via tt()" ;;
         esac
     else
