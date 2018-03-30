@@ -105,9 +105,6 @@ let Tlist_Use_Right_Window = 1
 
 noremap tl :TlistToggle<cr>
 
-map <F5> :!ctags -R --c++-kinds=+p --fields=+ias --extra=+q .<CR><CR> :TlistUpdate<CR>
-set tags=./tags,./../tags,./*/tags
-
 " nerdcommenter
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1

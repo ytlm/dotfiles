@@ -42,6 +42,69 @@ alias glg="git log --graph --pretty=format:\"%Cred%H%Creset : %s : %Cblue%an%Cre
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
 
+# yum
+alias ys="yum search"                       # search package
+alias yp="yum info"                         # show package info
+alias yl="yum list"                         # list packages
+alias ygl="yum grouplist"                   # list package groups
+alias yli="yum list installed"              # print all installed packages
+alias ymc="yum makecache"                   # rebuilds the yum package list
+
+alias yu="sudo yum update"                  # upgrate packages
+alias yi="sudo yum install"                 # install package
+alias ygi="sudo yum groupinstall"           # install package group
+alias yr="sudo yum remove"                  # remove package
+alias ygr="sudo yum groupremove"            # remove pagage group
+alias yrl="sudo yum remove --remove-leaves" # remove package and leaves
+alias yc="sudo yum clean all"               # clean cache
+
+
+
+# urlencode urldecode
+urlencode() {
+    # urlencode <string>
+    old_lc_collate=$LC_COLLATE
+    LC_COLLATE=C
+
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+        local c="${1:i:1}"
+        case $c in
+            [a-zA-Z0-9.~_-]) printf "$c" ;;
+            *) printf '%%%02X' "'$c" ;;
+        esac
+    done
+
+    LC_COLLATE=$old_lc_collate
+}
+
+urldecode() {
+    # urldecode <string>
+
+    local url_encoded="${1//+/ }"
+    printf '%b' "${url_encoded//%/\\x}"
+}
+
+
+# export
+export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/opt/ffmpeg/lib/pkgconfig
+
+export JAVA_HOME=/usr/java/jdk1.8.0_121
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
+
+export PATH=/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin:/bin:/sbin:$JAVA_HOME/bin:$JRE_HOME/bin:/home/ytl/Downloads/apache-maven-3.5.0/bin
+
+export LD_LIBRARY_PATH=/opt/ffmpeg/lib
+export LIBRARY_PATH=/opt/ffmpeg/lib
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# added by travis gem
+[ -f /home/ytl/.travis/travis.sh ] && source /home/ytl/.travis/travis.sh
+
+
+# tar
 function tt() {
     if [ -f $1 ] ; then
         case $1 in
@@ -60,25 +123,9 @@ function tt() {
             *.7Z)               7za x $1          ;;
             *.7z)               7za x $1          ;; # install p7zip
             *.deb)              ar -vx $1         ;;
-            *)            echo "'$1' cannot be extracted via tt()" ;;
+            *)            echo "'$1' cannot be extracted via '$0'" ;;
         esac
     else
         echo "'$1' is not a valid file"
     fi
 }
-
-export PKG_CONFIG_PATH=/usr/lib/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/lib64/pkgconfig:/opt/ffmpeg/lib/pkgconfig
-
-export JAVA_HOME=/usr/java/jdk1.8.0_121
-export JRE_HOME=${JAVA_HOME}/jre
-export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
-
-export PATH=/usr/bin:/usr/local/bin:/usr/sbin:/usr/local/sbin:/bin:/sbin:$JAVA_HOME/bin:$JRE_HOME/bin:/home/ytl/Downloads/apache-maven-3.5.0/bin
-
-export LD_LIBRARY_PATH=/opt/ffmpeg/lib
-export LIBRARY_PATH=/opt/ffmpeg/lib
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# added by travis gem
-[ -f /home/ytl/.travis/travis.sh ] && source /home/ytl/.travis/travis.sh
