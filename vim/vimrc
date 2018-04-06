@@ -47,6 +47,8 @@ set fileencodings=utf-8
 " set t_ti= t_te=
 set mouse-=a
 
+set foldmethod=indent
+
 autocmd BufWritePre * %s/\s\+$//e
 
 filetype plugin indent on
