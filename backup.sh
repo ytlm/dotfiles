@@ -7,6 +7,8 @@ pushd $basepath
 git config user.name "ytlm"
 git config user.email "ytlm1314@gmail.com"
 
+git checkout master
+
     pushd $basepath/screenFetch
         git checkout master
         git pull --all > /dev/null 2>&1
