@@ -36,6 +36,8 @@ filetype plugin indent on
 " set shortmess+=c
 " set t_ti= t_te=
 
+set clipboard=unnamed
+
 " }}}
 
 " statusline          -------------------------------------------          {{{
@@ -129,6 +131,9 @@ Plug 'ludovicchabant/vim-gutentags'
 " vim-session
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
+
+" vim-main
+Plug 'vim-utils/vim-man'
 
 call plug#end()
 " }}}
@@ -258,13 +263,13 @@ autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 
 function! AutoSetFileHead()
     if &filetype == 'sh'
-        call append(0, '\#!/usr/bin/env bash')
+        call append(0, '#!/usr/bin/env bash')
         call cursor(2, 0, 0)
     endif
 
     if &filetype == 'python'
-        call append(0, '\#!/usr/bin/env python')
-        call append(1, '\# _*_ encoding: utf-8 _*_')
+        call append(0, '#!/usr/bin/env python')
+        call append(1, '# _*_ encoding: utf-8 _*_')
         call cursor(3, 0, 0)
     endif
 endfunc

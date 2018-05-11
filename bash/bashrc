@@ -97,6 +97,9 @@ export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOM
 # added by travis gem
 [ -f /home/ytl/.travis/travis.sh ] && source /home/ytl/.travis/travis.sh
 
+# autojump
+[[ -s /home/ytl/.autojump/etc/profile.d/autojump.sh ]] && source /home/ytl/.autojump/etc/profile.d/autojump.sh
+
 
 # tar
 function tt() {
@@ -123,3 +126,6 @@ function tt() {
         echo "'$1' is not a valid file"
     fi
 }
+
+export FF_PATH=/home/ytl/Work/f-stack
+export FF_DPDK=$FF_PATH/dpdk/x86_64-native-linuxapp-gcc
