@@ -41,7 +41,7 @@ set clipboard=unnamed
 " }}}
 
 " statusline          -------------------------------------------          {{{
-set statusline=%.25F                      " full file path, with 25 width
+set statusline=%F                      " full file path, with 25 width
 set statusline+=\ %m\                     " modified flag
 set statusline+=[TYPE=%Y]                 " file type
 set statusline+=%=                        " right aligment

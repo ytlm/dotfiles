@@ -129,3 +129,5 @@ function tt() {
 
 export FF_PATH=/home/ytl/Work/f-stack
 export FF_DPDK=$FF_PATH/dpdk/x86_64-native-linuxapp-gcc
+
+gdbtool () { emacs -nw --eval "(gdb \"gdb --annotate=3 -i=mi $*\")";}
