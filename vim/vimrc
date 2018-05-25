@@ -101,7 +101,7 @@ noremap <C-p> :FZF<cr>
 " vim-plug         -----------------------------------------------         {{{
 "
 " install vim-plug
-" curl -vfLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
+" curl -vfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim
 
 call plug#begin('~/.vim/plugged')
 
@@ -110,7 +110,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [] }
 
 " nerdcommenter
 Plug 'scrooloose/nerdcommenter'
@@ -248,6 +248,11 @@ augroup main
     " auto open the last edit line
     autocmd BufReadPost * if line("'\"") > 1 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 
+augroup END
+
+augroup load_YCM
+    autocmd!
+    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_YCM
 augroup END
 " }}}
 
