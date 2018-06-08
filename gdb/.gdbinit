@@ -1,11 +1,10 @@
+# sudo git clone https://github.com/openresty/openresty-gdb-utils.git /opt/openresty-gdb-utils
 
-# https://github.com/openresty/openresty-gdb-utils.git
 directory /opt/openresty-gdb-utils
 
 py import sys
 py sys.path.append("/opt/openresty-gdb-utils")
 
-source luajit20.gdb
 source ngx-lua.gdb
 source luajit21.py
 source ngx-raw-req.py

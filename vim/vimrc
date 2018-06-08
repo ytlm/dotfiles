@@ -29,7 +29,7 @@ set fileencodings=utf-8
 
 set mouse-=a
 
-set foldmethod=indent
+set foldmethod=marker
 
 filetype plugin indent on
 
