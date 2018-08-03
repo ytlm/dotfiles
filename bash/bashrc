@@ -5,6 +5,10 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+fi
+
 shopt -s histappend
 
 export HISTFILESIZE=1000000
@@ -15,7 +19,7 @@ export HISTTIMEFORMAT='%F %T  '
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-export TERM="screen-256color"
+# export TERM="screen-256color"
 
 # User specific aliases and functions
 
@@ -87,18 +91,18 @@ urldecode() {
 
 
 # export
-export JAVA_HOME=/usr/java/jdk1.8.0_121
-export JRE_HOME=${JAVA_HOME}/jre
-export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
+# export JAVA_HOME=/usr/java/jdk1.8.0_121
+# export JRE_HOME=${JAVA_HOME}/jre
+# export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
 
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # added by travis gem
-[ -f /home/ytl/.travis/travis.sh ] && source /home/ytl/.travis/travis.sh
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 # autojump
-[[ -s /home/ytl/.autojump/etc/profile.d/autojump.sh ]] && source /home/ytl/.autojump/etc/profile.d/autojump.sh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 
 
 # tar

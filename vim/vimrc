@@ -96,6 +96,12 @@ onoremap il( :<C-u>normal! F(vi(<cr>
 " fzf
 noremap <C-p> :FZF<cr>
 
+" move split window
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
+
 " }}}
 
 " vim-plug         -----------------------------------------------         {{{
@@ -119,14 +125,14 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'vim-scripts/taglist.vim'
 
 " ultisnips
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " solarized
 " Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
 
 " vim-gutentags
-Plug 'ludovicchabant/vim-gutentags'
+" Plug 'ludovicchabant/vim-gutentags'
 
 " vim-session
 Plug 'xolox/vim-session'
@@ -134,6 +140,9 @@ Plug 'xolox/vim-misc'
 
 " vim-main
 Plug 'vim-utils/vim-man'
+
+" tabular
+Plug 'godlygeek/tabular'
 
 call plug#end()
 " }}}
@@ -240,6 +249,7 @@ let g:gutentags_auto_add_cscope = 0
 
 " group autocmd          ----------------------------------------          {{{
 augroup main
+
     autocmd!
 
     " delete whitespace
@@ -251,15 +261,19 @@ augroup main
 augroup END
 
 augroup load_YCM
+
     autocmd!
     autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_YCM
+
 augroup END
 " }}}
 
 " vimscript file setting          -------------------------------          {{{
 augroup filetype_vim
+
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
+
 augroup END
 " }}}
 
@@ -283,9 +297,9 @@ endfunc
 " theme setting          ----------------------------------------          {{{
 " syntax enable
 
-if exists('$TMUX')
-    set term=screen-256color
-endif
+" if exists('$TMUX')
+"     set term=screen-256color
+" endif
 
 " set t_Co=256
 " let g:solarized_termcolors=16
@@ -293,3 +307,25 @@ endif
 " set background=dark
 " colorscheme solarized
 " }}}
+
+" tabularize
+let mapleader=','
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+endfunction
