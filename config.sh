@@ -1,7 +1,8 @@
 #!/bin/bash
 
 currDir=$(cd `dirname $0`; pwd)
-homeDir=$HOME
+homeDir="/home/ytl"
+rootDir="/root/"
 
 if [[ "$USER" = "root" ]];then
 
@@ -13,13 +14,9 @@ if [[ "$USER" = "root" ]];then
     rm -rf /etc/aria2
     ln -sv $currDir/aria2 /etc/aria2
 
-# screenfetch
-    rm -rf /bin/screenfetch
-    ln -sv $currDir/screenFetch/screenfetch-dev /bin/screenfetch
-
 # vim
-    rm -rf $homeDir/.vim
-    ln -sv $homeDir/.vim /root/.vim
+    rm -rf $rootDir/.vim
+    ln -sv $homeDir/.vim $rootDir/.vim
 
 fi
 
@@ -54,11 +51,6 @@ ln -sv $currDir/gdb $homeDir/gdb
 # gnome-shell extensions
 mkdir -p $homeDir/.local/share/gnome-shell/
 ln -sv $currDir/gnome-shell/extensions/ $homeDir/.local/share/gnome-shell/extensions
-
-# fonts, Source Code Pro
-rm -rf $homeDir/.fonts
-ln -sv $currDir/fonts/ $homeDir/.fonts
-fc-cache -f -v
 
 # git
 rm -rf $homeDir/.gitconfig

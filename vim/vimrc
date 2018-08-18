@@ -112,7 +112,7 @@ nmap <C-l> <C-W>l
 call plug#begin('~/.vim/plugged')
 
 " fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " YouCompleteMe
@@ -125,14 +125,14 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'vim-scripts/taglist.vim'
 
 " ultisnips
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " solarized
 " Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
 
 " vim-gutentags
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 
 " vim-session
 Plug 'xolox/vim-session'
