@@ -50,7 +50,8 @@ ln -sv $currDir/gdb $homeDir/gdb
 
 # gnome-shell extensions
 mkdir -p $homeDir/.local/share/gnome-shell/
-ln -sv $currDir/gnome-shell/extensions/ $homeDir/.local/share/gnome-shell/extensions
+ln -sv $currDir/gnome/extensions/ $homeDir/.local/share/gnome/extensions
+ln -sv $currDir/gnome/icons/ $homeDir/.icons
 
 # git
 rm -rf $homeDir/.gitconfig
