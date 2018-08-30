@@ -1,6 +1,2 @@
 [credential]
 	helper = store
-[http]
-	proxy = socks5://127.0.0.1:8700
-[https]
-	proxy = socks5://127.0.0.1:8700

@@ -5,7 +5,7 @@ basepath=$(cd `dirname $0`; pwd)
 pushd $basepath
 
 git config user.name "ytlm"
-git config user.email "ytlm1314@gmail.com"
+git config user.email "ytlm.lv@gmail.com"
 
 git checkout master
 

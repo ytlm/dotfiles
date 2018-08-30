@@ -6,10 +6,6 @@ rootDir="/root/"
 
 if [[ "$USER" = "root" ]];then
 
-# conky
-    rm -rf /etc/conky
-    ln -sv $currDir/conky /etc/conky
-
 # aria2
     rm -rf /etc/aria2
     ln -sv $currDir/aria2 /etc/aria2
@@ -19,6 +15,9 @@ if [[ "$USER" = "root" ]];then
     ln -sv $homeDir/.vim $rootDir/.vim
 
 fi
+
+# conky
+ln -sv $currDir/conky $homeDir/.config/conky
 
 # sublime text 3
 mkdir -p $homeDir/.config
@@ -56,3 +55,8 @@ ln -sv $currDir/gnome/icons/ $homeDir/.icons
 # git
 rm -rf $homeDir/.gitconfig
 ln -sv $currDir/git/gitconfig $homeDir/.gitconfig
+
+crontab -l > /tmp/crontab
+echo "0 17 * * 5 sh $currDir/backup.sh > /dev/null 2>&1" >> /tmp/crontab
+crontab /tmp/crontab
+rm -rf /tmp/crontab
