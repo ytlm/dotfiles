@@ -9,15 +9,10 @@ git config user.email "ytlm.lv@gmail.com"
 
 git checkout master
 
-    pushd $basepath/screenFetch
-        git checkout master
-        git pull --all > /dev/null 2>&1
-    popd
-
 git pull --all > /dev/null 2>&1
 
-git status > /tmp/status.log 2>&1
-git diff > /tmp/diff.log 2>&1
+git status > /tmp/status 2>&1
+git diff > /tmp/diff 2>&1
 
 if [[ `wc -l /tmp/diff.log | awk '{print $1}'` -eq 0 ]]
 then
