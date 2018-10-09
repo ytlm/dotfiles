@@ -102,6 +102,8 @@ nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
 
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
 " }}}
 
 " vim-plug         -----------------------------------------------         {{{
