@@ -169,7 +169,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 " taglist setting          --------------------------------------          {{{
 let Tlist_Ctags_Cmd='/usr/bin/ctags'
 let Tlist_Show_One_File=1
-let Tlist_WinWidth=60
+let Tlist_WinWidth=50
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Use_Right_Window = 1
 
@@ -284,7 +284,7 @@ autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 
 function! AutoSetFileHead()
     if &filetype == 'sh'
-        call append(0, '#!/usr/bin/env bash')
+        call append(0, '#!/usr/bin/env sh')
         call cursor(2, 0, 0)
     endif
 
