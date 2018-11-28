@@ -7,6 +7,7 @@ set expandtab
 set noswapfile
 set nobackup
 set smartindent
+set autoindent
 
 set history=1000
 set nobackup
@@ -206,29 +207,6 @@ let g:ycm_semantic_triggers =  {
             \ }
 " }}}
 
-" cscope setting          ---------------------------------------          {{{
-" cscope -Rbq
-if has('cscope')
-    set csprg=/usr/bin/cscope
-    set csto=1
-    set cst
-    set nocsverb
-    if filereadable('cscope.out')
-        cs add cscope.out
-    endif
-    set csverb
-endif
-
-nnoremap <leader>cs :cs find s <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>cg :cs find g <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>cc :cs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>ct :cs find t <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>ce :cs find e <C-R>=expand("<cword>")<CR><CR>
-nnoremap <leader>cf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nnoremap <leader>ci :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nnoremap <leader>cd :cs find d <C-R>=expand("<cword>")<CR><CR>
-" }}}
-
 " gutentags setting           -----------------------------------          {{{
 " tags
 set tags=./.tags;,.tags
@@ -310,7 +288,7 @@ endfunc
 " colorscheme solarized
 " }}}
 
-" tabularize
+" tabularize            ---------------------------------------            {{{
 let mapleader=','
 if exists(":Tabularize")
     nmap <Leader>a= :Tabularize /=<CR>
@@ -331,3 +309,5 @@ function! s:align()
         call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
     endif
 endfunction
+" }}}
+
