@@ -64,7 +64,7 @@ noremap H ^
 noremap L $
 
 " press <space> to select a word
-noremap <space> viw
+nnoremap <space> viw
 
 inoremap jk <esc>
 
@@ -98,10 +98,16 @@ onoremap il( :<C-u>normal! F(vi(<cr>
 noremap <C-p> :FZF<cr>
 
 " move split window
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
-nmap <C-h> <C-W>h
-nmap <C-l> <C-W>l
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+
+" resize window
+nnoremap <M-j> :resize +5<cr>
+nnoremap <M-k> :resize -5<cr>
+nnoremap <M-h> :vertical resize -5<cr>
+nnoremap <M-l> :vertical resize +5<cr>
 
 nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
@@ -228,6 +234,7 @@ let g:gutentags_auto_add_cscope = 0
 " }}}
 
 " group autocmd          ----------------------------------------          {{{
+
 augroup main
 
     autocmd!
@@ -288,14 +295,13 @@ endfunc
 " colorscheme solarized
 " }}}
 
-" tabularize            ---------------------------------------            {{{
-let mapleader=','
-if exists(":Tabularize")
-    nmap <Leader>a= :Tabularize /=<CR>
-    vmap <Leader>a= :Tabularize /=<CR>
-    nmap <Leader>a: :Tabularize /:\zs<CR>
-    vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
+" tabular            ---------------------------------------            {{{
+" if exists(':Tabularize')
+    nnoremap <Leader>a= :Tabularize /=<CR>
+    vnoremap <Leader>a= :Tabularize /=<CR>
+    nnoremap <Leader>a: :Tabularize /:\zs<CR>
+    vnoremap <Leader>a: :Tabularize /:\zs<CR>
+" endif
 
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
@@ -310,4 +316,3 @@ function! s:align()
     endif
 endfunction
 " }}}
-
