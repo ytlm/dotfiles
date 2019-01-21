@@ -1,5 +1,10 @@
 " custom setting          ----------------------------------------         {{{
-set nu
+set number
+" set relativenumber
+set wrap
+set shiftround
+set showmatch
+set matchtime=1
 set shiftwidth=4
 set tabstop=4
 set expandtab
@@ -60,8 +65,10 @@ let maplocalleader='\\'
 noremap <leader>sv :source $MYVIMRC<cr>
 noremap <leader>ev :split $MYVIMRC<cr>
 
-noremap H ^
+noremap H 0
 noremap L $
+
+inoremap <c-d> <esc>ddOi
 
 " press <space> to select a word
 nnoremap <space> viw
@@ -73,8 +80,8 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 
 " surround the select word with quores
-vnoremap <leader>" o<esc>i"<esc>`>i"<esc>
-vnoremap <leader>' o<esc>i'<esc>`>i'<esc>
+vnoremap <leader>" <esc>a"<esc>`<i"<esc>e
+vnoremap <leader>' <esc>a'<esc>`<i'<esc>e
 
 " move to next line in normal mode
 nnoremap <leader>- ddp
@@ -83,9 +90,12 @@ nnoremap <leader>_ ddkP
 
 " delete a line in insert mode
 inoremap <leader><C-d> <esc>ddi
+
 " change word to upper in insert mode
 inoremap <leader><C-u> <esc>viwUea
 " change word to upper in normal mode
+nnoremap <leader><C-u> viwU
+
 nnoremap <leader><C-u> viwU
 
 " d y c
@@ -121,7 +131,7 @@ nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 call plug#begin('~/.vim/plugged')
 
 " fzf
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " YouCompleteMe
@@ -131,14 +141,14 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [
 Plug 'scrooloose/nerdcommenter'
 
 " taglist
-Plug 'vim-scripts/taglist.vim'
+" Plug 'vim-scripts/taglist.vim'
 
 " ultisnips
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " solarized
-" Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
+Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
 
 " vim-gutentags
 Plug 'ludovicchabant/vim-gutentags'
@@ -153,13 +163,23 @@ Plug 'vim-utils/vim-man'
 " tabular
 Plug 'godlygeek/tabular'
 
+" nerdtree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" ag
+Plug 'rking/ag.vim'
+
+" tagbar
+Plug 'majutsushi/tagbar'
+
 call plug#end()
 " }}}
 
 " vim-session setting          ----------------------------------          {{{
 let g:session_directory = '~/.cache/vim-session'
 let g:session_autoload = 'no'
-let g:session_autosave = 'no'
+let g:session_autosave = 'yes'
 let g:session_command_aliases = 1
 nnoremap <leader>so :OpenSession
 nnoremap <leader>ss :SaveSession
@@ -183,7 +203,25 @@ let Tlist_Use_Right_Window = 1
 noremap tl :TlistToggle<cr>
 " }}}
 
+" tagbar setting          --------------------------------------          {{{
+
+" need "Exuberant Ctags 5.5"
+nnoremap tb :TagbarToggle<CR>
+
+" }}}
+
+" ag setting          --------------------------------------          {{{
+
+" need "yum install the_silver_searcher"
+let g:ag_prg="/usr/bin/ag --vimgrep"
+let g:ag_working_path_mode="r"
+
+" }}}
+
 " nerdcommenter setting          --------------------------------          {{{
+
+" default mapping
+" [count]<leader>cc
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
@@ -191,6 +229,22 @@ let g:NERDAltDelims_java = 1
 let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+" }}}
+
+" nerdtree setting              --------------------------------           {{{
+
+" close window  only NERDTree
+augroup nerdtree
+
+    autocmd!
+
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+augroup END
+
+" map shortcut
+nnoremap nt :NERDTreeToggle<cr>
+
 " }}}
 
 " YouCompleteMe setting          --------------------------------          {{{
@@ -247,16 +301,17 @@ augroup main
 
 augroup END
 
-augroup load_YCM
+augroup loadYCM
 
     autocmd!
-    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_YCM
+    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! loadYCM
 
 augroup END
+
 " }}}
 
 " vimscript file setting          -------------------------------          {{{
-augroup filetype_vim
+augroup filetypeVim
 
     autocmd!
     autocmd FileType vim setlocal foldmethod=marker
@@ -269,7 +324,7 @@ autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
 
 function! AutoSetFileHead()
     if &filetype == 'sh'
-        call append(0, '#!/usr/bin/env sh')
+        call append(0, '#!/usr/bin/env bash')
         call cursor(2, 0, 0)
     endif
 
@@ -282,11 +337,11 @@ endfunc
 " }}}
 
 " theme setting          ----------------------------------------          {{{
-" syntax enable
+syntax enable
 
-" if exists('$TMUX')
-"     set term=screen-256color
-" endif
+if exists('$TMUX')
+    set term=screen
+endif
 
 " set t_Co=256
 " let g:solarized_termcolors=16
