@@ -17,7 +17,7 @@ export HISTTIMEFORMAT='%F %T  '
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
 
-# export TERM="screen-256color"
+export TERM="screen"
 
 # User specific aliases and functions
 
@@ -31,6 +31,9 @@ alias lh='ls -lh'
 
 # vim
 alias vi='vim'
+
+# emacs
+alias ee='emacs -nw'
 
 # git
 alias gpa="git pull --all"
@@ -51,14 +54,6 @@ alias yl="yum list"                         # list packages
 alias ygl="yum grouplist"                   # list package groups
 alias yli="yum list installed"              # print all installed packages
 alias ymc="yum makecache"                   # rebuilds the yum package list
-
-alias yu="sudo yum update"                  # upgrate packages
-alias yi="sudo yum install"                 # install package
-alias ygi="sudo yum groupinstall"           # install package group
-alias yr="sudo yum remove"                  # remove package
-alias ygr="sudo yum groupremove"            # remove pagage group
-alias yrl="sudo yum remove --remove-leaves" # remove package and leaves
-alias yc="sudo yum clean all"               # clean cache
 
 
 
@@ -93,15 +88,14 @@ urldecode() {
 # export JRE_HOME=${JAVA_HOME}/jre
 # export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
 
-[ -f /usr/share/fzf/completion.bash ] && source /usr/share/fzf/completion.bash
-[ -f /usr/share/fzf/key-bindings.bash ] && source /usr/share/fzf/key-bindings.bash
-
 # added by travis gem
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 # autojump
-[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 
+# fzf
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 # tar
 function tt() {
