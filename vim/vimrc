@@ -208,6 +208,8 @@ noremap tl :TlistToggle<cr>
 " need "Exuberant Ctags 5.5"
 nnoremap tb :TagbarToggle<CR>
 
+let g:tagbar_sort = 0
+
 " }}}
 
 " ag setting          --------------------------------------          {{{
