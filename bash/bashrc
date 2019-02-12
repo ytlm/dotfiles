@@ -95,6 +95,9 @@ urldecode() {
 # fzf
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
+# git
+[[ -f /usr/share/git/completion/git-completion.bash ]] && source /usr/share/git/completion/git-completion.bash
+
 # tar
 function tt() {
     if [ -f $1 ] ; then
