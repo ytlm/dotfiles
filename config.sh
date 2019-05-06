@@ -56,6 +56,10 @@ ln -sv $currDir/gnome/icons/ $homeDir/.icons
 rm -rf $homeDir/.gitconfig
 ln -sv $currDir/git/gitconfig $homeDir/.gitconfig
 
+# i3
+rm -rf $homeDir/.i3
+ln -sv $currDir/i3 $homeDir/.i3
+
 crontab -l > /tmp/crontab
 echo "0 17 * * 5 sh $currDir/backup.sh > /dev/null 2>&1" >> /tmp/crontab
 crontab /tmp/crontab
