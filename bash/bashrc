@@ -53,7 +53,8 @@ alias ygl="yum grouplist"                   # list package groups
 alias yli="yum list installed"              # print all installed packages
 alias ymc="yum makecache"                   # rebuilds the yum package list
 
-
+alias grep='grep -v grep | grep'
+alias pg='ps aux | grep'
 
 # urlencode urldecode
 urlencode() {
