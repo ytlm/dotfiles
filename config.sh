@@ -1,7 +1,7 @@
 #!/bin/bash
 
 currDir=$(cd `dirname $0`; pwd)
-homeDir="/home/ytl"
+homeDir="/home/${USER}/"
 rootDir="/root/"
 
 if [[ "$USER" = "root" ]];then
