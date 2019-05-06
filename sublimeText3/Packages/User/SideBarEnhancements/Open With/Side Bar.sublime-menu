@@ -1,0 +1,26 @@
+[
+	{"id": "side-bar-files-open-with",
+		"children":
+		[
+			//separator
+			{"caption":"-"},
+
+			//application n
+			{
+				"caption": "xdg-open",
+				"id": "side-bar-files-open-with-xdg-open",
+
+				"command": "side_bar_files_open_with",
+				"args": {
+									"paths": [],
+									"application": "/usr/bin/xdg-open",
+									"extensions":"docx|pdf|jpeg", //any file with extension
+									"args":[]
+						},
+				"open_automatically" : true // will close the view/tab and launch the application
+			},
+
+			{"caption":"-"}
+		]
+	}
+]

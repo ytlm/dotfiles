@@ -1,0 +1,375 @@
+" custom setting          ----------------------------------------         {{{
+set number
+" set relativenumber
+set wrap
+set shiftround
+set showmatch
+set matchtime=1
+set shiftwidth=4
+set tabstop=4
+set expandtab
+
+set noswapfile
+set nobackup
+set smartindent
+set autoindent
+
+set history=1000
+set nobackup
+" set ruler
+" set cursorline
+set scrolloff=1
+set laststatus=2
+set backspace=indent,eol,start
+set hlsearch
+
+set showcmd
+
+set nocompatible
+
+" set ignorecase smartcase
+
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8
+
+set mouse-=a
+
+set foldmethod=marker
+
+filetype plugin indent on
+
+" set shortmess+=c
+" set t_ti= t_te=
+
+set clipboard=unnamed
+
+" }}}
+
+" statusline          -------------------------------------------          {{{
+set statusline=%F                      " full file path, with 25 width
+set statusline+=\ %m\                     " modified flag
+set statusline+=[TYPE=%Y]                 " file type
+set statusline+=%=                        " right aligment
+set statusline+=[POS:%v-%l/%L]            " cursor pos, column number, curr linenumber/total linenumber
+set statusline+=\ %P                      " percentage
+" }}}
+
+" keymapping          -------------------------------------------         {{{
+" replace double @ to email
+iabbrev @@ ytlm1314@gmail.com
+
+let mapleader=','
+let maplocalleader='\\'
+
+noremap <leader>sv :source $MYVIMRC<cr>
+noremap <leader>ev :split $MYVIMRC<cr>
+
+noremap H 0
+noremap L $
+
+inoremap <c-d> <esc>ddOi
+
+" press <space> to select a word
+nnoremap <space> viw
+
+inoremap jk <esc>
+
+" surround the word with quotes
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+
+" surround the select word with quores
+vnoremap <leader>" <esc>a"<esc>`<i"<esc>e
+vnoremap <leader>' <esc>a'<esc>`<i'<esc>e
+
+" move to next line in normal mode
+nnoremap <leader>- ddp
+" move to previous line in normal mode
+nnoremap <leader>_ ddkP
+
+" delete a line in insert mode
+inoremap <leader><C-d> <esc>ddi
+
+" change word to upper in insert mode
+inoremap <leader><C-u> <esc>viwUea
+" change word to upper in normal mode
+nnoremap <leader><C-u> viwU
+
+nnoremap <leader><C-u> viwU
+
+" d y c
+onoremap p i(
+
+onoremap in( :<C-u>normal! f(vi(<cr>
+onoremap il( :<C-u>normal! F(vi(<cr>
+
+" fzf
+noremap <C-p> :FZF<cr>
+
+" move split window
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+
+" resize window
+nnoremap <M-j> :resize +5<cr>
+nnoremap <M-k> :resize -5<cr>
+nnoremap <M-h> :vertical resize -5<cr>
+nnoremap <M-l> :vertical resize +5<cr>
+
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+" }}}
+
+" vim-plug         -----------------------------------------------         {{{
+"
+" install vim-plug
+" curl -vfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim
+
+call plug#begin('~/.vim/plugged')
+
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" YouCompleteMe
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [] }
+
+" nerdcommenter
+Plug 'scrooloose/nerdcommenter'
+
+" taglist
+" Plug 'vim-scripts/taglist.vim'
+
+" ultisnips
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" solarized
+Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors'}
+
+" vim-gutentags
+Plug 'ludovicchabant/vim-gutentags'
+
+" vim-session
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
+
+" vim-main
+Plug 'vim-utils/vim-man'
+
+" tabular
+Plug 'godlygeek/tabular'
+
+" nerdtree
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" ag
+Plug 'rking/ag.vim'
+
+" tagbar
+Plug 'majutsushi/tagbar'
+
+call plug#end()
+" }}}
+
+" vim-session setting          ----------------------------------          {{{
+let g:session_directory = '~/.cache/vim-session'
+let g:session_autoload = 'no'
+let g:session_autosave = 'yes'
+let g:session_command_aliases = 1
+nnoremap <leader>so :OpenSession
+nnoremap <leader>ss :SaveSession
+nnoremap <leader>sd :DeleteSession<CR>
+nnoremap <leader>sc :CloseSession<CR>
+" }}}
+
+" ultisnips setting          ------------------------------------          {{{
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+" }}}
+
+" taglist setting          --------------------------------------          {{{
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Show_One_File=1
+let Tlist_WinWidth=50
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Use_Right_Window = 1
+
+noremap tl :TlistToggle<cr>
+" }}}
+
+" tagbar setting          --------------------------------------          {{{
+
+" need "Exuberant Ctags 5.5"
+nnoremap tb :TagbarToggle<CR>
+
+let g:tagbar_sort = 0
+
+" }}}
+
+" ag setting          --------------------------------------          {{{
+
+" need "yum install the_silver_searcher"
+let g:ag_prg="/usr/bin/ag --vimgrep"
+let g:ag_working_path_mode="r"
+
+" }}}
+
+" nerdcommenter setting          --------------------------------          {{{
+
+" default mapping
+" [count]<leader>cc
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
+" }}}
+
+" nerdtree setting              --------------------------------           {{{
+
+" close window  only NERDTree
+augroup nerdtree
+
+    autocmd!
+
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+augroup END
+
+" map shortcut
+nnoremap nt :NERDTreeToggle<cr>
+
+" }}}
+
+" YouCompleteMe setting          --------------------------------          {{{
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+let g:ycm_cache_omnifunc = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_key_invoke_completion = '<C-space>'
+let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_server_log_level = 'info'
+let g:ycm_min_num_identifier_candidate_chars = 2
+set completeopt=menu,menuone
+
+let g:ycm_semantic_triggers =  {
+            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+            \ 'cs,lua,javascript': ['re!\w{2}'],
+            \ }
+" }}}
+
+" gutentags setting           -----------------------------------          {{{
+" tags
+set tags=./.tags;,.tags
+
+let g:gutentags_ctags_executable = '/usr/bin/ctags'
+let g:gutentags_modules = ['ctags']
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+let g:gutentags_ctags_tag_file = '.tags'
+let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extras=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+let g:gutentags_cache_dir = '~/.cache/vim-tags'
+
+" let g:gutentags_trace = 1
+
+let g:gutentags_cscope_executable = '/usr/bin/cscope'
+let g:gutentags_auto_add_cscope = 0
+" }}}
+
+" group autocmd          ----------------------------------------          {{{
+
+augroup main
+
+    autocmd!
+
+    " delete whitespace
+    autocmd BufWritePre * %s/\s\+$//e
+
+    " auto open the last edit line
+    autocmd BufReadPost * if line("'\"") > 1 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+augroup END
+
+augroup loadYCM
+
+    autocmd!
+    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! loadYCM
+
+augroup END
+
+" }}}
+
+" vimscript file setting          -------------------------------          {{{
+augroup filetypeVim
+
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+
+augroup END
+" }}}
+
+" auto write file header          -------------------------------          {{{
+autocmd BufNewFile *.sh,*.py exec ":call AutoSetFileHead()"
+
+function! AutoSetFileHead()
+    if &filetype == 'sh'
+        call append(0, '#!/usr/bin/env bash')
+        call cursor(2, 0, 0)
+    endif
+
+    if &filetype == 'python'
+        call append(0, '#!/usr/bin/env python')
+        call append(1, '# _*_ encoding: utf-8 _*_')
+        call cursor(3, 0, 0)
+    endif
+endfunc
+" }}}
+
+" theme setting          ----------------------------------------          {{{
+syntax enable
+
+if exists('$TMUX')
+    set term=screen
+endif
+
+set t_Co=256
+" let g:solarized_termcolors=16
+
+set background=dark
+" colorscheme solarized
+" }}}
+
+" tabular            ---------------------------------------            {{{
+" if exists(':Tabularize')
+    nnoremap <Leader>a= :Tabularize /=<CR>
+    vnoremap <Leader>a= :Tabularize /=<CR>
+    nnoremap <Leader>a: :Tabularize /:\zs<CR>
+    vnoremap <Leader>a: :Tabularize /:\zs<CR>
+" endif
+
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+
+function! s:align()
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+endfunction
+" }}}

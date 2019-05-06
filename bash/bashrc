@@ -1,0 +1,132 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+shopt -s histappend
+
+export HISTFILESIZE=1000000
+export HISTSIZE=100000
+
+export HISTTIMEFORMAT='%F %T  '
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+export TERM="screen-256color"
+
+# User specific aliases and functions
+
+# ls
+alias ls='ls --color=always'
+alias l='ls -l'
+alias ll='ls -l'
+alias la='ls -la'
+alias lt='ls -lt'
+alias lh='ls -lh'
+
+# vim
+alias vi='vim'
+
+# emacs
+alias ee='emacs -nw'
+
+# git
+alias gpa="git pull --all"
+alias gsu="git submodule update"
+alias gdf="git diff"
+alias gst="git status"
+alias gco="git checkout"
+alias gad="git add"
+alias glg="git log --graph --pretty=format:\"%Cred%H%Creset : %s : %Cblue%an%Creset%Cgreen(%cr)%Creset\""
+
+alias copy='xsel --clipboard --input'
+alias paste='xsel --clipboard --output'
+
+# yum
+alias ys="yum search"                       # search package
+alias yp="yum info"                         # show package info
+alias yl="yum list"                         # list packages
+alias ygl="yum grouplist"                   # list package groups
+alias yli="yum list installed"              # print all installed packages
+alias ymc="yum makecache"                   # rebuilds the yum package list
+
+alias grep='grep -v grep | grep'
+alias pg='ps aux | grep'
+
+# urlencode urldecode
+urlencode() {
+    # urlencode <string>
+    old_lc_collate=$LC_COLLATE
+    LC_COLLATE=C
+
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+        local c="${1:i:1}"
+        case $c in
+            [a-zA-Z0-9.~_-]) printf "$c" ;;
+            *) printf '%%%02X' "'$c" ;;
+        esac
+    done
+
+    LC_COLLATE=$old_lc_collate
+}
+
+urldecode() {
+    # urldecode <string>
+
+    local url_encoded="${1//+/ }"
+    printf '%b' "${url_encoded//%/\\x}"
+}
+
+
+# export
+# export JAVA_HOME=/usr/java/jdk1.8.0_121
+# export JRE_HOME=${JAVA_HOME}/jre
+# export CLASS_PATH=.:${JAVA_HOME}/lib/dt.jar:${JAVA_HOME}/lib/tools.jar:${JRE_HOME}/lib
+
+# added by travis gem
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+
+# autojump
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
+
+# fzf
+[[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+
+# git
+[[ -f /usr/share/git/completion/git-completion.bash ]] && source /usr/share/git/completion/git-completion.bash
+
+# tar
+function tt() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)          tar -jxvf $1      ;;
+            *.tar.gz)           tar -xvf $1       ;;
+            *.tar.xz)           tar -Jxvf $1      ;;
+            *.tar)              tar -xvf $1       ;;
+            *.tbz2)             tar -xjf $1       ;;
+            *.tgz|*.pkg)        tar -xzf $1       ;;
+            *.bz2)              bunzip2 -kdvf $1  ;;
+            *.rar)              unrar x $1        ;;
+            *.gz)               gunzip $1         ;;
+            *.zip)              unzip $1          ;;
+            *.war)              jar -xf $1        ;;
+            *.Z)                uncompress $1     ;;
+            *.7Z)               7za x $1          ;;
+            *.7z)               7za x $1          ;; # install p7zip
+            *.deb)              ar -vx $1         ;;
+            *)            echo "'$1' cannot be extracted via '$0'" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# /etc/environment
+# export GTK_IM_MODULE=fcitx
+# export QT_IM_MODULE=fcitx
+# export XMODIFIERS=@im=fcitx
+

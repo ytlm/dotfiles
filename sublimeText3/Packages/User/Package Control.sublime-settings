@@ -1,0 +1,25 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"All Autocomplete",
+		"Codecs33",
+		"ConvertToUTF8",
+		"CTags",
+		"DocBlockr",
+		"Dockerfile Syntax Highlighting",
+		"FileDiffs",
+		"MarkdownPreview",
+		"nginx",
+		"Package Control",
+		"PlainTasks",
+		"Pretty JSON",
+		"Pretty YAML",
+		"SideBarEnhancements",
+		"Theme - Soda"
+	]
+}
