@@ -1,3 +1,9 @@
 Host *
-ControlMaster auto
-ControlPath ~/.ssh/master-%r@%h:%p
+    ControlMaster auto
+    ControlPath ~/.ssh/connection-%r@%h:%p
+    ControlPersist 4h
+    # ControlPersist yes
+    Compression yes
+    TCPKeepAlive yes
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
