@@ -1,7 +1,7 @@
 #!/bin/bash
 
 currDir=$(cd `dirname $0`; pwd)
-homeDir="/home/ytl"
+homeDir="/home/${USER}/"
 rootDir="/root/"
 
 if [[ "$USER" = "root" ]];then
@@ -39,10 +39,6 @@ rm -rf $homeDir/.bashrc
 ln -sv $currDir/bash/bashrc $homeDir/.bashrc
 source $homeDir/.bashrc
 
-# zsh
-rm -rf $homeDir/.zshrc
-ln -sv $currDir/zsh/zshrc $homeDir/.zshrc
-
 # gdb init
 rm -rf $homeDir/gdb
 ln -sv $currDir/gdb $homeDir/gdb
@@ -55,6 +51,15 @@ ln -sv $currDir/gnome/icons/ $homeDir/.icons
 # git
 rm -rf $homeDir/.gitconfig
 ln -sv $currDir/git/gitconfig $homeDir/.gitconfig
+
+# i3
+rm -rf $homeDir/.i3
+ln -sv $currDir/i3 $homeDir/.i3
+
+# ssh
+mkdir -p $homeDir/.ssh
+rm -rf $homeDir/.ssh/config
+ln -sv $currDir/ssh/config $homeDir/.ssh/config
 
 crontab -l > /tmp/crontab
 echo "0 17 * * 5 sh $currDir/backup.sh > /dev/null 2>&1" >> /tmp/crontab

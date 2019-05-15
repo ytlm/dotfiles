@@ -1,2 +1,2 @@
-# Config
-Common software configuration
+# dotfiles
+Custom configuration

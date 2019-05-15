@@ -17,6 +17,8 @@ export HISTTIMEFORMAT='%F %T  '
 
 export TERM="screen-256color"
 
+export EDITOR=vim
+
 # User specific aliases and functions
 
 # ls
@@ -45,15 +47,7 @@ alias glg="git log --graph --pretty=format:\"%Cred%H%Creset : %s : %Cblue%an%Cre
 alias copy='xsel --clipboard --input'
 alias paste='xsel --clipboard --output'
 
-# yum
-alias ys="yum search"                       # search package
-alias yp="yum info"                         # show package info
-alias yl="yum list"                         # list packages
-alias ygl="yum grouplist"                   # list package groups
-alias yli="yum list installed"              # print all installed packages
-alias ymc="yum makecache"                   # rebuilds the yum package list
-
-alias grep='grep -v grep | grep'
+# commands
 alias pg='ps aux | grep'
 
 # urlencode urldecode
@@ -91,7 +85,7 @@ urldecode() {
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 # autojump
-[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
+[[ -s /etc/profile.d/autojump.bash ]] && source /etc/profile.d/autojump.bash
 
 # fzf
 [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
@@ -126,7 +120,7 @@ function tt() {
 }
 
 # /etc/environment
-# export GTK_IM_MODULE=fcitx
-# export QT_IM_MODULE=fcitx
-# export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
 
