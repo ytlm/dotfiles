@@ -1,4 +1,4 @@
-[SolarizedDarkModify]
+[SolarizedDark]
 text=839496
 cyan(bold)=00ffff
 text(bold)=e9e9e9
@@ -19,5 +19,5 @@ black=000000
 blue=00bfff
 black(bold)=808080
 [Names]
-name0=SolarizedDarkModify
+name0=SolarizedDark
 count=1
