@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+diff=/tmp/diff.log
+status=/tmp/status.log
+
 basepath=$(cd `dirname $0`; pwd)
 
 pushd $basepath
@@ -11,10 +14,10 @@ git checkout master
 
 git pull --all > /dev/null 2>&1
 
-git status > /tmp/status 2>&1
-git diff > /tmp/diff 2>&1
+git status > $status 2>&1
+git diff > $diff 2>&1
 
-if [[ `wc -l /tmp/diff.log | awk '{print $1}'` -eq 0 ]]
+if [[ `wc -l $diff | awk '{print $1}'` -eq 0 ]]
 then
     exit 0
 fi
