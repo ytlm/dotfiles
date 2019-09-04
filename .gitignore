@@ -14,3 +14,6 @@ gdb/.gdb.history
 gdb/.gdb.log
 gdb/.gdb.bp
 gdb/core.*
+
+aria2/aria2.log
+aria2/aria2.session
