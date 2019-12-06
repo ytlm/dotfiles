@@ -1,20 +1,8 @@
 #!/bin/bash
 
 currDir=$(cd `dirname $0`; pwd)
-homeDir="/home/${USER}/"
-rootDir="/root/"
-
-if [[ "$USER" = "root" ]];then
-
-# aria2
-    rm -rf /etc/aria2
-    ln -sv $currDir/aria2 /etc/aria2
-
-# vim
-    rm -rf $rootDir/.vim
-    ln -sv $homeDir/.vim $rootDir/.vim
-
-fi
+homeDir=$HOME
+machine=$(uname)
 
 # conky
 ln -sv $currDir/conky $homeDir/.config/conky
@@ -35,9 +23,19 @@ ln -sv $currDir/vim/vimrc $homeDir/.vimrc
 ln -sv $currDir/vim/ycm_extra_conf.py $homeDir/.vim/ycm_extra_conf.py
 
 # bash
-rm -rf $homeDir/.bashrc
-ln -sv $currDir/bash/bashrc $homeDir/.bashrc
-source $homeDir/.bashrc
+
+rm -rf $homeDir/.dircolors
+ln -sv $currDir/bash/dircolors $homeDir/.dircolors
+
+if [ "$machine" = "Darwin" ]; then
+    rm -rf $homeDir/.bashrc_profile
+    ln -sv $currDir/bash/bashrc $homeDir/.bashrc_profile
+    source $homeDir/.bashrc_profile
+else
+    rm -rf $homeDir/.bashrc
+    ln -sv $currDir/bash/bashrc $homeDir/.bashrc
+    source $homeDir/.bashrc
+fi
 
 # gdb init
 rm -rf $homeDir/gdb
@@ -62,6 +60,8 @@ rm -rf $homeDir/.ssh/config
 ln -sv $currDir/ssh/config $homeDir/.ssh/config
 
 crontab -l > /tmp/crontab
-echo "0 17 * * 5 sh $currDir/backup.sh > /dev/null 2>&1" >> /tmp/crontab
+if [ $(grep backup /tmp/crontab) ]; then
+    echo "0 17 * * 5 sh $currDir/backup.sh > /dev/null 2>&1" >> /tmp/crontab
+fi
 crontab /tmp/crontab
 rm -rf /tmp/crontab
