@@ -1,6 +1,5 @@
 " custom setting          ----------------------------------------         {{{
-set number
-set relativenumber
+set number relativenumber
 set wrap
 set shiftround
 set showmatch
@@ -150,88 +149,94 @@ inoremap <leader>z <esc>:q!<cr>
 
 " vim-plug         -----------------------------------------------         {{{
 "
-" install vim-plug
-" curl -vfLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim
+
+" auto install vim-plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+            \ https://raw.github.com/junegunn/vim-plug/master/plug.vim
+
+    auto VimEnter *PlugInstall
+
+endif
 
 call plug#begin('~/.vim/plugged')
 
-" fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+    " fzf
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 
-" YouCompleteMe
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [] }
+    " YouCompleteMe
+    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [] }
 
-" nerdcommenter
-Plug 'scrooloose/nerdcommenter'
+    " nerdcommenter
+    Plug 'scrooloose/nerdcommenter'
 
-" ultisnips
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+    " ultisnips
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
 
-" solarized
-" Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
+    " solarized
+    " Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
 
-" monokai
-" Plug 'sickill/vim-monokai', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
+    " monokai
+    " Plug 'sickill/vim-monokai', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
 
-" dracula
-" Plug 'dracula/vim', { 'as': 'dracula' }
+    " dracula
+    " Plug 'dracula/vim', { 'as': 'dracula' }
 
-" vim-session
-Plug 'xolox/vim-session'
-Plug 'xolox/vim-misc'
+    " vim-session
+    Plug 'xolox/vim-session'
+    Plug 'xolox/vim-misc'
 
-" vim-main
-Plug 'vim-utils/vim-man'
+    " vim-main
+    Plug 'vim-utils/vim-man'
 
-" vim-gutentags
-" Plug 'ludovicchabant/vim-gutentags'
+    " vim-gutentags
+    " Plug 'ludovicchabant/vim-gutentags'
 
-" tabular
-Plug 'godlygeek/tabular'
-" vim-easy-align
-Plug 'junegunn/vim-easy-align'
+    " tabular
+    Plug 'godlygeek/tabular'
+    " vim-easy-align
+    Plug 'junegunn/vim-easy-align'
 
-" nerdtree
-Plug 'scrooloose/nerdtree'
+    " nerdtree
+    Plug 'scrooloose/nerdtree'
 
-" ag
-Plug 'rking/ag.vim'
+    " ag
+    Plug 'rking/ag.vim'
 
-" tagbar
-Plug 'majutsushi/tagbar'
+    " tagbar
+    Plug 'majutsushi/tagbar'
 
-" indentLine
-Plug 'Yggdroot/indentLine'
+    " indentLine
+    Plug 'Yggdroot/indentLine'
 
-" vimtex
-Plug 'lervag/vimtex'
+    " vimtex
+    Plug 'lervag/vimtex'
 
-" ale
-" Plug 'w0rp/ale'
+    " ale
+    " Plug 'w0rp/ale'
 
-" vim syntastic
-" Plug 'vim-syntastic/syntastic'
+    " vim syntastic
+    " Plug 'vim-syntastic/syntastic'
 
-" vim autoformat
-" Plug 'Chiel92/vim-autoformat'
+    " vim autoformat
+    " Plug 'Chiel92/vim-autoformat'
 
-" vim lsp
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
+    " vim lsp
+    " Plug 'prabirshrestha/async.vim'
+    " Plug 'prabirshrestha/vim-lsp'
 
-" vim-go
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " vim-go
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 " }}}
 
-
 " vim-go       ----------------------------------          {{{
 let g:go_fmt_command = "goimports"
 " }}}
-
 
 " vim lsp      ----------------------------------          {{{
 
