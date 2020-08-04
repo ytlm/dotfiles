@@ -7,6 +7,7 @@ set matchtime=1
 set shiftwidth=4
 set tabstop=4
 set expandtab
+set conceallevel=0
 
 set noswapfile
 set nobackup
@@ -104,7 +105,6 @@ inoremap <leader><C-u> <esc>viwUea
 " change word to upper in normal mode
 nnoremap <leader><C-u> viwU
 
-nnoremap <leader><C-u> viwU
 
 " d y c
 onoremap p i(
@@ -163,11 +163,11 @@ endif
 call plug#begin('~/.vim/plugged')
 
     " fzf
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
 
     " YouCompleteMe
-    Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [] }
+    " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [] }
 
     " nerdcommenter
     Plug 'scrooloose/nerdcommenter'
@@ -236,6 +236,7 @@ call plug#end()
 
 " vim-go       ----------------------------------          {{{
 let g:go_fmt_command = "goimports"
+let g:go_version_warning = 0
 " }}}
 
 " vim lsp      ----------------------------------          {{{
@@ -294,6 +295,9 @@ nnoremap <c-h> :Ag<space>
 
 " indentLine setting          ----------------------------------          {{{
 noremap <leader>dl :IndentLinesToggle<cr>
+
+autocmd FileType json,markdown let g:indentLine_conceallevel = 0
+autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel = 2
 " }}}
 
 " vim-session setting          ----------------------------------          {{{
