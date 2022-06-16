@@ -14,8 +14,8 @@ set nobackup
 set smartindent
 set autoindent
 
-" set colorcolumn=81
-" hi ColorColumn ctermbg=DarkGrey guibg=DarkGrey
+set colorcolumn=81
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 set history=1000
 set nobackup
@@ -156,25 +156,22 @@ if empty(glob("~/.vim/autoload/plug.vim"))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
             \ https://raw.github.com/junegunn/vim-plug/master/plug.vim
 
-    auto VimEnter *PlugInstall
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 
 endif
 
 call plug#begin('~/.vim/plugged')
 
     " fzf
-    Plug 'junegunn/fzf', { 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
-
-    " YouCompleteMe
-    " Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer', 'on': [] }
 
     " nerdcommenter
     Plug 'scrooloose/nerdcommenter'
 
     " ultisnips
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
+    " Plug 'SirVer/ultisnips'
+    " Plug 'honza/vim-snippets'
 
     " solarized
     " Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
@@ -212,24 +209,14 @@ call plug#begin('~/.vim/plugged')
     " indentLine
     Plug 'Yggdroot/indentLine'
 
-    " vimtex
-    Plug 'lervag/vimtex'
-
-    " ale
-    " Plug 'w0rp/ale'
-
-    " vim syntastic
-    " Plug 'vim-syntastic/syntastic'
-
-    " vim autoformat
-    " Plug 'Chiel92/vim-autoformat'
-
-    " vim lsp
-    " Plug 'prabirshrestha/async.vim'
-    " Plug 'prabirshrestha/vim-lsp'
-
     " vim-go
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+    " vim-rust
+    Plug 'rust-lang/rust.vim'
+
+    " coc.nvim for lsp
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 " }}}
@@ -241,21 +228,37 @@ let g:go_version_warning = 0
 
 " vim lsp      ----------------------------------          {{{
 
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-                \ 'name': 'clangd',
-                \ 'cmd': {server_info->['clangd', '-background-index']},
-                \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-                \ })
-endif
-
-if executable('lua-lsp')
-    au User lsp_setup call lsp#register_server({
-                \ 'name': 'lua-lsp',
-                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
-                \ 'whitelist': ['lua'],
-                \ })
-endif
+" if executable('clangd')
+"     au User lsp_setup call lsp#register_server({
+"                 \ 'name': 'clangd',
+"                 \ 'cmd': {server_info->['clangd', '-background-index']},
+"                 \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+"                 \ })
+" endif
+"
+" if executable('lua-lsp')
+"     au User lsp_setup call lsp#register_server({
+"                 \ 'name': 'lua-lsp',
+"                 \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
+"                 \ 'whitelist': ['lua'],
+"                 \ })
+" endif
+"
+" augroup LspGo
+"     au!
+"     if executable('gopls')
+"         autocmd User lsb_setup call lsb#register_server({
+"                     \ 'name': 'golang',
+"                     \ 'cmd': {serverr_info->['gopls']}
+"                     \ 'whitelist': [ 'go' ],
+"                     \ })
+"
+"         autocmd FileType go setlocal omnifunc=lsp#complete
+"         " autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
+"         " autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
+"         " autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
+"     endif
+" augroup END
 
 " }}}
 
@@ -381,24 +384,37 @@ nnoremap nt :NERDTreeToggle<cr>
 
 " }}}
 
-" YouCompleteMe setting          --------------------------------          {{{
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
-let g:ycm_cache_omnifunc = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_key_invoke_completion = '<C-space>'
-let g:ycm_add_preview_to_completeopt = 0
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_min_num_identifier_candidate_chars = 2
-set completeopt=menu,menuone
-
-let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-            \ 'cs,lua,javascript': ['re!\w{2}'],
-            \ }
-" }}}
-
 " group autocmd          ----------------------------------------          {{{
+
+" :cc replace :CocConfig
+function! SetupCommandAbbrs(from, to)
+    exec 'cnoreabbrev <expr> '.a:from
+        \ .' ((getcmdtype() ==# ":" && getcmdline() ==# "'.a:from.'")'
+        \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+endfunction
+
+call SetupCommandAbbrs('cc', 'CocConfig')
+
+
+" <Tab> trigger completion
+function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1] =~ '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<Tab>" :
+        \ coc#refresh()
+
+
+
+augroup quickfixClose
+    " autocmd !
+    autocmd WinEnter * if winnr("$") == 1 && getbufvar(winbufnr(winnr()), "&buftype") == "quickfix" | q | endif
+    autocmd BufEnter * if 0 == len(filter(range(1, winnr('$')), 'empty(getbufvar(winbufnr(v:val), "&bt"))')) | qa! | endif
+augroup END
+
 
 augroup main
 
@@ -409,13 +425,6 @@ augroup main
 
     " auto open the last edit line
     autocmd BufReadPost * if line("'\"") > 1 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-augroup END
-
-augroup loadYCM
-
-    autocmd!
-    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! loadYCM
 
 augroup END
 

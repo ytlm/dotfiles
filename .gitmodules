@@ -1,3 +1,6 @@
 [submodule "bash/dircolors"]
 	path = bash/dircolors
 	url = https://github.com//seebi/dircolors-solarized
+[submodule "z.lua"]
+	path = z.lua
+	url = https://github.com/skywind3000/z.lua.git
