@@ -79,6 +79,14 @@ urldecode() {
     printf '%b' "${url_encoded//%/\\x}"
 }
 
+function upper() {
+    echo $1 | tr '[:lower:]' '[:upper:]'
+}
+
+function lower() {
+    echo $1 | tr '[:upper:]' '[:lower:]'
+}
+
 
 # export
 # export JAVA_HOME=/usr/java/jdk1.8.0_121
@@ -130,13 +138,25 @@ export XMODIFIERS=@im=fcitx
 
 export DEAD=/dev/null
 
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
 export LESS="-eirMX"
 
 eval $(dircolors ~/.dircolors/dircolors.ansi-light)
 
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+
+# export LC_CTYPE=en_US.UTF-8
+export LC_ALL=C
+
+# export http_proxy=10.23.73.133:1087
+# export https_proxy=10.23.73.133:1087
+
+# source "/root/Work/emsdk/emsdk_env.sh"
+
+export PROTOBUF=/usr/local/protobuf
+export PATH=$PROTOBUF/bin:/usr/local/go/bin:/root/go/bin:$PATH
+
+. "$HOME/.cargo/env"
+
+# seabuild() { docker run -v $HOME/Work/seastar/:/seastar -u $(id -u):$(id -g) -w /seastar -t seastar-dev "$@"; }
+seabuild() { docker run -v $HOME/Work/seastar/:/seastar -u $(id -u):$(id -g) -w /seastar -t seastar-dev:v0.0.1 "$@"; }
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

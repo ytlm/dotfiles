@@ -8,3 +8,8 @@
 	ui = auto
 	branch = auto
 	status = auto
+[pull]
+	ff = only
+[https]
+[http]
+[alias]

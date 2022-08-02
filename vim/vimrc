@@ -64,7 +64,7 @@ set statusline+=\ %P                      " percentage
 
 " keymapping          -------------------------------------------         {{{
 " replace double @ to email
-iabbrev @@ ytlm1314@gmail.com
+iabbrev @@ ytlm.lv@gmail.com
 
 let mapleader=','
 let maplocalleader='\\'
@@ -179,9 +179,6 @@ call plug#begin('~/.vim/plugged')
     " monokai
     " Plug 'sickill/vim-monokai', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
 
-    " dracula
-    " Plug 'dracula/vim', { 'as': 'dracula' }
-
     " vim-session
     Plug 'xolox/vim-session'
     Plug 'xolox/vim-misc'
@@ -190,7 +187,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-utils/vim-man'
 
     " vim-gutentags
-    " Plug 'ludovicchabant/vim-gutentags'
+    Plug 'ludovicchabant/vim-gutentags'
 
     " tabular
     Plug 'godlygeek/tabular'
@@ -217,6 +214,12 @@ call plug#begin('~/.vim/plugged')
 
     " coc.nvim for lsp
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+    " dracula
+    Plug 'dracula/vim', {'as': 'dracula'}
+
+    " c.vim
+    Plug 'vim-scripts/c.vim'
 
 call plug#end()
 " }}}
@@ -324,7 +327,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " need "Exuberant Ctags"
 let tagbar_ctags_bin='/usr/bin/ctags'
-
 nnoremap tb :TagbarToggle<CR>
 
 let g:tagbar_sort = 0
@@ -332,18 +334,27 @@ let g:tagbar_sort = 0
 " }}}
 
 " vim-gutentags setting          --------------------------------------          {{{
-" set tags=./.tags;,.tags
+
+let s:vim_tags = expand('~/.cache/vim-tags')
+
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+set tags=./.tags;,.tags
 " ctags -R --fields=+niazS --extra=+q --C++-kinds=+px --C-kinds=+px ./
-" let g:gutentags_ctags_executable = '/usr/bin/ctags'
-" let g:gutentags_project_root = ['.git']
-" let g:gutentags_ctags_tagfile = '.tags'
-" let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extra=+q']
-" let g:gutentags_ctags_extra_args += ['--C++-kinds=+px']
-" let g:gutentags_ctags_extra_args += ['--C-kinds=+px']
-"
-" let g:gutentags_cache_dir = '~/.cache/vim-tags'
-"
-" let g:gutentags_trace = 0
+let g:gutentags_ctags_executable = '/usr/bin/ctags'
+let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_ctags_extra_args  = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--C++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--C-kinds=+px']
+
+let g:gutentags_cache_dir = s:vim_tags
+
+let g:gutentags_trace = 0
+
+
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
 
 " }}}
 
@@ -384,7 +395,7 @@ nnoremap nt :NERDTreeToggle<cr>
 
 " }}}
 
-" group autocmd          ----------------------------------------          {{{
+" coc ----------------------------------------          {{{
 
 " :cc replace :CocConfig
 function! SetupCommandAbbrs(from, to)
@@ -407,7 +418,11 @@ inoremap <silent><expr> <Tab>
         \ <SID>check_back_space() ? "\<Tab>" :
         \ coc#refresh()
 
+highlight CocErrorFloat ctermfg=0
 
+" }}}
+
+" group autocmd          ----------------------------------------          {{{
 
 augroup quickfixClose
     " autocmd !
@@ -468,7 +483,7 @@ syntax on
 
 " set background=dark
 " colorscheme solarized
-" color dracula
+" colorscheme dracula
 " }}}
 
 " vim-easy-align ---------------------------------------            {{{

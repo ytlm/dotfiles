@@ -7,3 +7,10 @@ Host *
     TCPKeepAlive yes
     ServerAliveInterval 30
     ServerAliveCountMax 6
+
+Host ytl.nvm
+    HostName 172.16.38.104
+    Port 22
+    User root
+    IdentityFile  ~/.ssh/id_rsa
+    IdentitiesOnly yes
