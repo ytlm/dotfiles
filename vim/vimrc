@@ -11,6 +11,7 @@ set conceallevel=0
 
 set noswapfile
 set nobackup
+set nowritebackup
 set smartindent
 set autoindent
 
@@ -18,7 +19,6 @@ set colorcolumn=81
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 set history=1000
-set nobackup
 " set ruler
 " set cursorline
 set scrolloff=1
@@ -29,6 +29,10 @@ set hlsearch
 set showcmd
 
 set nocompatible
+
+set updatetime=300
+
+set signcolumn=yes
 
 " set ignorecase smartcase
 
@@ -218,9 +222,6 @@ call plug#begin('~/.vim/plugged')
     " dracula
     Plug 'dracula/vim', {'as': 'dracula'}
 
-    " c.vim
-    Plug 'vim-scripts/c.vim'
-
 call plug#end()
 " }}}
 
@@ -408,15 +409,26 @@ call SetupCommandAbbrs('cc', 'CocConfig')
 
 
 " <Tab> trigger completion
-function! s:check_back_space() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1] =~ '\s'
+function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1] =~# '\s'
 endfunction
 
-inoremap <silent><expr> <Tab>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<Tab>" :
-        \ coc#refresh()
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 highlight CocErrorFloat ctermfg=0
 
