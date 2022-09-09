@@ -131,7 +131,6 @@ nnoremap <M-k> :resize -5<cr>
 nnoremap <M-h> :vertical resize -5<cr>
 nnoremap <M-l> :vertical resize +5<cr>
 
-nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 function! LinenumberToggle()
     set number!
@@ -173,28 +172,18 @@ call plug#begin('~/.vim/plugged')
     " nerdcommenter
     Plug 'scrooloose/nerdcommenter'
 
-    " ultisnips
-    " Plug 'SirVer/ultisnips'
-    " Plug 'honza/vim-snippets'
-
     " solarized
     " Plug 'altercation/vim-colors-solarized', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
 
     " monokai
     " Plug 'sickill/vim-monokai', { 'do': 'ln -s ~/.vim/plugged/vim-colors-solarized/colors ~/.vim/colors' }
 
-    " vim-session
-    Plug 'xolox/vim-session'
-    Plug 'xolox/vim-misc'
-
-    " vim-main
-    Plug 'vim-utils/vim-man'
-
     " vim-gutentags
     Plug 'ludovicchabant/vim-gutentags'
 
     " tabular
     Plug 'godlygeek/tabular'
+
     " vim-easy-align
     Plug 'junegunn/vim-easy-align'
 
@@ -219,9 +208,6 @@ call plug#begin('~/.vim/plugged')
     " coc.nvim for lsp
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    " dracula
-    Plug 'dracula/vim', {'as': 'dracula'}
-
 call plug#end()
 " }}}
 
@@ -230,98 +216,11 @@ let g:go_fmt_command = "goimports"
 let g:go_version_warning = 0
 " }}}
 
-" vim lsp      ----------------------------------          {{{
-
-" if executable('clangd')
-"     au User lsp_setup call lsp#register_server({
-"                 \ 'name': 'clangd',
-"                 \ 'cmd': {server_info->['clangd', '-background-index']},
-"                 \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-"                 \ })
-" endif
-"
-" if executable('lua-lsp')
-"     au User lsp_setup call lsp#register_server({
-"                 \ 'name': 'lua-lsp',
-"                 \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
-"                 \ 'whitelist': ['lua'],
-"                 \ })
-" endif
-"
-" augroup LspGo
-"     au!
-"     if executable('gopls')
-"         autocmd User lsb_setup call lsb#register_server({
-"                     \ 'name': 'golang',
-"                     \ 'cmd': {serverr_info->['gopls']}
-"                     \ 'whitelist': [ 'go' ],
-"                     \ })
-"
-"         autocmd FileType go setlocal omnifunc=lsp#complete
-"         " autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
-"         " autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
-"         " autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
-"     endif
-" augroup END
-
-" }}}
-
-" vim autoformat      ----------------------------------          {{{
-
-nnoremap <leader>p :Autoformat<cr>
-inoremap <leader>p <esc>:Autoformat<cr>i
-
-" }}}
-
-" vim syntastic       ----------------------------------          {{{
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 1
-" }}}
-
-" ale setting          ----------------------------------          {{{
-
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-let g:ale_lint_on_enter = 0
-
-nnoremap <at> :ALEToggle<cr>
-" }}}
-
-" Ag setting          ----------------------------------          {{{
-let g:ag_prg='/usr/bin/ag --nogroup --nocolor --column --vimgrep'
-nnoremap <c-f> :Ag<space><cword><cr>
-nnoremap <c-h> :Ag<space>
-" }}}
-
 " indentLine setting          ----------------------------------          {{{
 noremap <leader>dl :IndentLinesToggle<cr>
 
 autocmd FileType json,markdown let g:indentLine_conceallevel = 0
 autocmd FileType javascript,python,c,cpp,java,vim,shell let g:indentLine_conceallevel = 2
-" }}}
-
-" vim-session setting          ----------------------------------          {{{
-let g:session_directory = '~/.cache/vim-session'
-let g:session_autoload = 'no'
-let g:session_autosave = 'yes'
-let g:session_command_aliases = 1
-nnoremap <leader>so :OpenSession
-nnoremap <leader>ss :SaveSession
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
-" }}}
-
-" ultisnips setting          ------------------------------------          {{{
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-b>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 " }}}
 
 " tagbar setting          --------------------------------------          {{{
@@ -359,12 +258,13 @@ endif
 
 " }}}
 
-" ag setting          --------------------------------------          {{{
-
+" ag setting          ----------------------------------          {{{
 " need "yum install the_silver_searcher"
-let g:ag_prg="/usr/bin/ag --vimgrep"
+let g:ag_prg='/usr/bin/ag --nogroup --nocolor --column --vimgrep'
 let g:ag_working_path_mode="r"
 
+nnoremap <c-f> :Ag<space><cword><cr>
+nnoremap <c-h> :Ag<space>
 " }}}
 
 " nerdcommenter setting          --------------------------------          {{{
