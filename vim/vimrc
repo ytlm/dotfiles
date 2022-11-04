@@ -148,6 +148,9 @@ inoremap <leader>q <esc>:wq<cr>
 nnoremap <leader>z :q!<cr>
 inoremap <leader>z <esc>:q!<cr>
 
+nnoremap <leader>f zfi{
+nnoremap <leader>F zo
+
 " }}}
 
 " vim-plug         -----------------------------------------------         {{{
@@ -260,7 +263,7 @@ endif
 
 " ag setting          ----------------------------------          {{{
 " need "yum install the_silver_searcher"
-let g:ag_prg='/usr/bin/ag --nogroup --nocolor --column --vimgrep'
+let g:ag_prg='/usr/bin/ag -f --nogroup --nocolor --column --vimgrep'
 let g:ag_working_path_mode="r"
 
 nnoremap <c-f> :Ag<space><cword><cr>
