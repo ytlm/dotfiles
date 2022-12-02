@@ -36,4 +36,5 @@ nodejs \
 yarn \
 universal-ctags \
 clangd-13 \
-llvm
+llvm \
+jq
