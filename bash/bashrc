@@ -101,9 +101,13 @@ function lower() {
 
 # fzf
 [[ -f ~/.fzf/shell/key-bindings.bash ]] && source ~/.fzf/shell/key-bindings.bash
+[[ -f /usr/share/doc/fzf/examples/key-bindings.bash ]] && source /usr/share/doc/fzf/examples/key-bindings.bash
 
 # git
 [[ -f /usr/share/git/completion/git-completion.bash ]] && source /usr/share/git/completion/git-completion.bash
+
+# bazel
+[[ -f /usr/local/lib/bazel/bin/bazel-complete.bash ]] && source /usr/local/lib/bazel/bin/bazel-complete.bash
 
 # tar
 function tt() {
@@ -160,3 +164,7 @@ export PATH=$PROTOBUF/bin:/usr/local/go/bin:/root/go/bin:$PATH
 seabuild() { docker run -v $HOME/Work/seastar/:/seastar -u $(id -u):$(id -g) -w /seastar -t seastar-dev:v0.0.1 "$@"; }
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:/root/mygit/rocksdb/include
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/root/mygit/rocksdb
+export LIBRARY_PATH=${LIBRARY_PATH}:/root/mygit/rocksdb

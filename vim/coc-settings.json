@@ -1,0 +1,27 @@
+{
+    "languageserver":{
+        "bash": {
+            "command": "bash-language-server",
+            "args": ["start"],
+            "filetypes": ["sh"],
+            "ignoredRootPaths": ["~"]
+        },
+        "rust": {
+            "command": "rust-analyzer",
+            "filetypes": ["rust"],
+            "rootPatterns": ["Cargo.toml"]
+        },
+        "ccls": {
+                        "command": "ccls",
+                        "filetypes": ["c", "cc", "cpp", "c++"],
+                        "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".root"],
+                        "initializationOptions": {
+                                "cache": {
+                                        "directory": ".ccls-cache"
+                                },
+                "highlight": {"lsRanges": true }
+                        }
+                }
+    },
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/13.0.0/clangd_13.0.0/bin/clangd"
+}

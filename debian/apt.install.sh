@@ -35,6 +35,15 @@ make \
 nodejs \
 yarn \
 universal-ctags \
-clangd-13 \
 llvm \
-jq
+jq \
+bc \
+cmake \
+silversearcher-ag \
+unzip \
+clang-13 \
+libclang-13-dev
+
+
+# npm config set registry https://mirrors.huaweicloud.com/repository/npm/
+npm i -g bash-language-server

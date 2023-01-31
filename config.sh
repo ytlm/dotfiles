@@ -21,6 +21,7 @@ mkdir -p $homeDir/.vim/autoload
 rm -rf $homeDir/.vimrc
 ln -sv $currDir/vim/vimrc $homeDir/.vimrc
 ln -sv $currDir/vim/ycm_extra_conf.py $homeDir/.vim/ycm_extra_conf.py
+ln -sf $currDir/vim/coc-settings.json $homeDir/.vim/coc-settings.json
 
 # bash
 

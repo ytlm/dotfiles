@@ -8,8 +8,8 @@ Host *
     ServerAliveInterval 30
     ServerAliveCountMax 6
 
-Host ytl.nvm
-    HostName 172.16.38.104
+Host ytl.debian
+    HostName 10.23.179.64
     Port 22
     User root
     IdentityFile  ~/.ssh/id_rsa
