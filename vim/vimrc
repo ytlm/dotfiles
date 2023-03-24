@@ -203,7 +203,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'Yggdroot/indentLine'
 
     " vim-go
-    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
     " vim-rust
     Plug 'rust-lang/rust.vim'
@@ -215,8 +215,7 @@ call plug#end()
 " }}}
 
 " vim-go       ----------------------------------          {{{
-let g:go_fmt_command = "goimports"
-let g:go_version_warning = 0
+
 " }}}
 
 " indentLine setting          ----------------------------------          {{{
