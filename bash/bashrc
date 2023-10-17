@@ -5,6 +5,8 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+machine=$(uname)
+
 shopt -s histappend
 
 export HISTFILESIZE=1000000
@@ -144,7 +146,9 @@ export DEAD=/dev/null
 
 export LESS="-eirMX"
 
-eval $(dircolors ~/.dircolors/dircolors.ansi-light)
+if [ "$machine" != "Darwin" ]; then
+    eval $(dircolors ~/.dircolors/dircolors.ansi-light)
+fi
 
 
 # export LC_CTYPE=en_US.UTF-8
@@ -165,6 +169,13 @@ seabuild() { docker run -v $HOME/Work/seastar/:/seastar -u $(id -u):$(id -g) -w 
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export CPLUS_INCLUDE_PATH=${CPLUS_INCLUDE_PATH}:/root/mygit/rocksdb/include
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/root/mygit/rocksdb
-export LIBRARY_PATH=${LIBRARY_PATH}:/root/mygit/rocksdb
+## for bazel
+export BAZEL_HOME="/usr/local/bazel"
+
+export PATH="$BAZEL_HOME/bin:$PATH"
+
+# for bash complete
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+
+export LC_ALL="en_US.UTF-8"

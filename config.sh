@@ -29,9 +29,9 @@ rm -rf $homeDir/.dircolors
 ln -sv $currDir/bash/dircolors $homeDir/.dircolors
 
 if [ "$machine" = "Darwin" ]; then
-    rm -rf $homeDir/.bashrc_profile
-    ln -sv $currDir/bash/bashrc $homeDir/.bashrc_profile
-    source $homeDir/.bashrc_profile
+    rm -rf $homeDir/.bash_profile
+    ln -sv $currDir/bash/bashrc $homeDir/.bash_profile
+    source $homeDir/.bash_profile
 else
     rm -rf $homeDir/.bashrc
     ln -sv $currDir/bash/bashrc $homeDir/.bashrc
