@@ -34,7 +34,8 @@ g++ \
 make \
 nodejs \
 yarn \
-universal-ctags \
+ripgrep \
+bash-completion \
 llvm \
 jq \
 bc \

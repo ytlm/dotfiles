@@ -2,17 +2,12 @@
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
+    . /etc/bashrc
 fi
 
 machine=$(uname)
 
 shopt -s histappend
-
-export HISTFILESIZE=1000000
-export HISTSIZE=100000
-
-export HISTTIMEFORMAT='%F %T  '
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
@@ -179,3 +174,61 @@ export PATH="$BAZEL_HOME/bin:$PATH"
 
 
 export LC_ALL="en_US.UTF-8"
+
+function proxy_on() {
+    export http_proxy=http://127.0.0.1:7890
+    export https_proxy=http://127.0.0.1:7890
+    export no_proxy=127.0.0.1,localhost
+    export HTTP_PROXY=http://127.0.0.1:7890
+    export HTTPS_PROXY=http://127.0.0.1:7890
+    export NO_PROXY=127.0.0.1,localhost
+    echo -e "\033[32m[√] 已开启代理\033[0m"
+}
+
+# 关闭系统代理
+function proxy_off(){
+    unset http_proxy
+    unset https_proxy
+    unset no_proxy
+    unset HTTP_PROXY
+    unset HTTPS_PROXY
+    unset NO_PROXY
+    echo -e "\033[31m[×] 已关闭代理\033[0m"
+}
+
+alias 'curl-http3'='docker run -t --rm badouralix/curl-http3'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+OLD_PS1=$PS1
+
+R='\[\e[38;2;255;100;100m\]'
+G='\[\e[38;2;100;255;100m\]'
+B='\[\e[38;2;100;100;255m\]'
+W='\[\e[0m\]'
+PS1="$R\u$W@$B\h$W:$G\w$W\$ "
+
+# 启用即时写入历史记录到文件
+export HISTTIMEFORMAT='%F %T  '
+
+export HISTCONTROL=ignoredups:erasedups  # 忽略重复命令并删除历史记录中的重复项
+export HISTFILESIZE=1000000              # 设置历史记录文件大小
+export HISTSIZE=100000                   # 设置最大命令历史记录数
+
+export HISTFILE=~/.bash_history          # 指定历史文件的存储路径
+
+# 同步历史记录到文件
+shopt -s histappend                      # 允许追加历史记录，而不是覆盖文件
+export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+
+
+. "$HOME/.local/bin/env"
+
+[[ -s "/root/.gvm/scripts/gvm" ]] && source "/root/.gvm/scripts/gvm"
+unset -f cd
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
